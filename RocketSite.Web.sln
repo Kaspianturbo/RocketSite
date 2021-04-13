@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketSite.Web", "..\RocketSite.Web\RocketSite.Web.csproj", "{C5C633D9-EEDC-426E-8AE3-1C88D9FF6983}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketSite.Web", "RocketSite.Web\RocketSite.Web.csproj", "{C5C633D9-EEDC-426E-8AE3-1C88D9FF6983}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketSite.Common", "..\RocketSite.Common\RocketSite.Common.csproj", "{97FCD116-D015-4061-8462-F1EBD9BA36DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketSite.Common", "RocketSite.Common\RocketSite.Common.csproj", "{97FCD116-D015-4061-8462-F1EBD9BA36DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
