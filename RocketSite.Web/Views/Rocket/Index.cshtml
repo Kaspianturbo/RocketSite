@@ -1,0 +1,44 @@
+﻿@model IEnumerable<RocketSite.Common.Models.Rocket>
+@{
+    
+}
+<h2>@ViewData["Title"]</h2>
+<p>
+    <a asp-controller="Rocket" asp-action="Create">Добавити</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Имя</th>
+        <th>Возраст</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@item.Name</td>
+    <td>
+        @item.Cost
+    </td>
+    <td>
+        @item.Diameter
+    </td>
+    <td>
+        @item.Height
+    </td>
+    <td>
+        @item.MassToGTO
+    </td>
+    <td>
+        @item.MassToLEO
+    </td>
+    <td>
+        @item.EngineType
+    </td>
+    <td>
+        <a asp-controller="Rocket" asp-action="Edit" asp-route-id="@item.Name">Змінити</a> |
+        <a asp-controller="Rocket" asp-action="Delete" asp-route-id="@item.Name">Видалити</a>
+    </td>
+</tr>
+    }
+</table>
