@@ -17,7 +17,7 @@ namespace RocketSite.Web.Controllers
         }
         public ActionResult Index()
         {
-            return View(_repository.GetUsers());
+            return View(_repository.GetObjects());
         }
 
         public ActionResult Details(string name)

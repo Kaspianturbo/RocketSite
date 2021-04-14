@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace RocketSite.Common.Models
 {
-    public class Equipment
+    public class Сosmodrome
     {
         public string Name { get; set; }
-        public string Producer { get; set; }
-        public int Cost { get; set; }
-        public Rocket CompatibleRocket { get; set; }
+        public string Timezone { get; set; }
+        public Location Location { get; set; }
+        public List<Employee> Employees { get; set; }
     }
 }

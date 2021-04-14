@@ -8,6 +8,7 @@ namespace RocketSite.Common.Models
     public class Rocket
     {
         public string Name { get; set; }
+        public string Version { get; set; }
         public int Weight { get; set; }
         public int Height { get; set; }
         public int Diameter { get; set; }

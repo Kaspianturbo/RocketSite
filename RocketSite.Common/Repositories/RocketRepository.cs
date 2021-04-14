@@ -45,7 +45,7 @@ namespace RocketSite.Common.Repositories
             }
         }
 
-        public List<Rocket> GetUsers()
+        public List<Rocket> GetObjects()
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
@@ -57,7 +57,18 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                var sqlQuery = "UPDATE Rocket SET weight = @weight, height = @height WHERE name = @name";
+                var sqlQuery = $"UPDATE Rocket SET " +
+                    $"name = @Name, " +
+                    $"version = @Version, " +
+                    $"weight = @Weight, " +
+                    $"height = @Height, " +
+                    $"diameter = @Diameter, " +
+                    $"cost = @Cost, " +
+                    $"stages = @Stages, " +
+                    $"massToLEO = @MassToLEO, " +
+                    $"massToGTO = @MassToGTO, " +
+                    $"engineType = @EngineType, " +
+                    $"WHERE name = @Name AND version = @Version";
                 db.Execute(sqlQuery, rocket);
             }
         }
