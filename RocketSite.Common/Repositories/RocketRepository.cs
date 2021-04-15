@@ -25,11 +25,6 @@ namespace RocketSite.Common.Repositories
                 var sqlQuery = $"INSERT INTO Rocket (name, version, weight, height, diameter, cost, stages, massToLEO, massToGTO, engineType) " +
                     "VALUES(@Name, @Version, @Weight, @Height, @Diameter, @Cost, @Stages, @MassToLEO, @MassToGTO, @EngineType)";
                 db.Execute(sqlQuery, user);
-
-                // если мы хотим получить id добавленного пользователя
-                //var sqlQuery = "INSERT INTO Users (Name, Age) VALUES(@Name, @Age); SELECT CAST(SCOPE_IDENTITY() as int)";
-                //int? userId = db.Query<int>(sqlQuery, user).FirstOrDefault();
-                //user.Id = userId.Value;
             }
         }
 

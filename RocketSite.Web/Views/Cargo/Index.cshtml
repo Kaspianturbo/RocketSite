@@ -1,0 +1,36 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<RocketSite.Common.Models.Cargo>
+@{
+
+}
+<h2>@ViewData["Title"]</h2>
+<p>
+    <a asp-controller="Cargo" asp-action="Create">Добавити</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Широта</th>
+        <th>Довгота</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>
+                @item.Type
+            </td>
+            <td>
+                @item.Weight
+            </td>
+            <td>
+                @item.Emaunt
+            </td>
+            <td>
+                <a asp-controller="Cargo" asp-action="Edit" asp-route-name="@item.Name" asp-route-type="@item.Type">Змінити</a> |
+                <a asp-controller="Cargo" asp-action="Delete" asp-route-name="@item.Name" asp-route-type="@item.Type">Видалити</a>
+            </td>
+        </tr>
+    }
+</table>
