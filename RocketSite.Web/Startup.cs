@@ -21,6 +21,7 @@ namespace RocketSite.Web
         {
             string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=RocketSiteDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddTransient<ICRUDRepository<Rocket>, RocketRepository>(provider => new RocketRepository(connectionString));
+            services.AddTransient<ICRUDRepository<Location>, LocationRepository>(provider => new LocationRepository(connectionString));
             services.AddControllersWithViews();
         }
 

@@ -1,0 +1,36 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<RocketSite.Common.Models.Location>
+@{
+
+}
+<h2>@ViewData["Title"]</h2>
+<p>
+    <a asp-controller="Location" asp-action="Create">Добавити</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Широта</th>
+        <th>Довгота</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Latitude</td>
+            <td>
+                @item.Longitude
+            </td>
+            <td>
+                @item.Country
+            </td>
+            <td>
+                @item.City
+            </td>
+            <td>
+                <a asp-controller="Location" asp-action="Edit" asp-route-latitude="@item.Latitude" asp-route-longitude="@item.Longitude">Змінити</a> |
+                <a asp-controller="Location" asp-action="Delete" asp-route-latitude="@item.Latitude" asp-route-longitude="@item.Longitude">Видалити</a>
+            </td>
+        </tr>
+    }
+</table>

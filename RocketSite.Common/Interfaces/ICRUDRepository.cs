@@ -10,9 +10,9 @@ namespace RocketSite.Common.Interfaces
     public interface ICRUDRepository<T>
     {
         void Create(T @object);
-        void Delete(int id);
-        T Get(string name);
+        void Delete(T @object);
+        T Get(T @object);
         List<T> GetObjects();
-        void Update(T @object);
+        void Update(T @object, Key key);
     }
 }

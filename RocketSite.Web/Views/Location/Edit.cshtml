@@ -1,0 +1,37 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model RocketSite.Common.Models.Location
+@{
+}
+<h2>@ViewData["Title"].</h2>
+
+<form asp-action="Edit" asp-controller="Location">
+    <div>
+        <div class="form-group">
+            <input type="text" name="First" value="@Model.Latitude" class="form-control" hidden/>
+            <input type="text" name="Second" value="@Model.Longitude" class="form-control" hidden/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Latitude"></label>
+            <input type="text" asp-for="Latitude" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Longitude"></label>
+            <input asp-for="Longitude" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Country"></label>
+            <input asp-for="Country" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="City"></label>
+            <input asp-for="City" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Сохранить" class="btn btn-outline-secondary" />
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-controller="Location" asp-action="Index">Вернуться к списку</a>
+</div>

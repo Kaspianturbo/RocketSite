@@ -22,8 +22,9 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                //var sqlQuery = "INSERT INTO Rocket (Name, Age) VALUES(@Name, @Age)";
-                //db.Execute(sqlQuery, user);
+                var sqlQuery = $"INSERT INTO Rocket (name, version, weight, height, diameter, cost, stages, massToLEO, massToGTO, engineType) " +
+                    "VALUES(@Name, @Version, @Weight, @Height, @Diameter, @Cost, @Stages, @MassToLEO, @MassToGTO, @EngineType)";
+                db.Execute(sqlQuery, user);
 
                 // если мы хотим получить id добавленного пользователя
                 //var sqlQuery = "INSERT INTO Users (Name, Age) VALUES(@Name, @Age); SELECT CAST(SCOPE_IDENTITY() as int)";
@@ -32,16 +33,20 @@ namespace RocketSite.Common.Repositories
             }
         }
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Rocket Get(string name)
+        public void Delete(Rocket @object)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                return db.Query<Rocket>("SELECT * FROM Rocket WHERE name = @name", new { name }).FirstOrDefault();
+                var sqlQuery = "DELETE FROM Rocket WHERE name = @Name AND version = @Version";
+                db.Execute(sqlQuery, @object);
+            }
+        }
+
+        public Rocket Get(Rocket @object)
+        {
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                return db.Query<Rocket>("SELECT * FROM Rocket WHERE name = @Name AND version = @Version", @object).FirstOrDefault();
             }
         }
 
@@ -53,7 +58,7 @@ namespace RocketSite.Common.Repositories
             }
         }
 
-        public void Update(Rocket rocket)
+        public void Update(Rocket rocket, Key key)
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
@@ -67,8 +72,8 @@ namespace RocketSite.Common.Repositories
                     $"stages = @Stages, " +
                     $"massToLEO = @MassToLEO, " +
                     $"massToGTO = @MassToGTO, " +
-                    $"engineType = @EngineType, " +
-                    $"WHERE name = @Name AND version = @Version";
+                    $"engineType = @EngineType " +
+                    $"WHERE name = \'{key.First}\' AND version = \'{key.Second}\'";
                 db.Execute(sqlQuery, rocket);
             }
         }

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace RocketSite.Web.Controllers
 {
-    public class RocketController : Controller
+    public class LocationController : Controller
     {
-        ICRUDRepository<Rocket> _repository;
-        public RocketController(ICRUDRepository<Rocket> repository)
+        ICRUDRepository<Location> _repository;
+        public LocationController(ICRUDRepository<Location> repository)
         {
             _repository = repository;
         }
@@ -20,9 +20,9 @@ namespace RocketSite.Web.Controllers
             return View(_repository.GetObjects());
         }
 
-        public ActionResult Details(string name, string version)
+        public ActionResult Details(double latitude, double longitude)
         {
-            Rocket user = _repository.Get(new Rocket {Name = name, Version = version });
+            Location user = _repository.Get(new Location { Latitude = latitude, Longitude = longitude });
             if (user != null)
                 return View(user);
             return NotFound();
@@ -34,33 +34,30 @@ namespace RocketSite.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Rocket user)
+        public ActionResult Create(Location location)
         {
-            _repository.Create(user);
+            _repository.Create(location);
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit(string name, string version)
+        public ActionResult Edit(double latitude, double longitude)
         {
-            Rocket user = _repository.Get(new Rocket { Name = name, Version = version});
+            Location user = _repository.Get(new Location { Latitude = latitude, Longitude = longitude });
             if (user != null)
                 return View(user);
             return NotFound();
         }
 
         [HttpPost]
-        public ActionResult Edit(Rocket user, Key key)
+        public ActionResult Edit(Location @object, Key key)
         {
-            _repository.Update(user, key);
+            _repository.Update(@object, key);
             return RedirectToAction("Index");
         }
 
-
-        [HttpGet]
-        [ActionName("Delete")]
-        public ActionResult Delete(string name, string version)
+        public ActionResult Delete(double latitude, double longitude)
         {
-            _repository.Delete(new Rocket { Name = name, Version = version });
+            _repository.Delete(new Location { Latitude = latitude, Longitude = longitude });
             return RedirectToAction("Index");
         }
     }

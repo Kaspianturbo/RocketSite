@@ -1,0 +1,55 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model RocketSite.Common.Models.Rocket
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create" asp-controller="Rocket">
+    <div>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input type="text" asp-for="Name" class="form-control form-control-sm" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Version"></label>
+            <input asp-for="Version" class="form-control  form-control-sm" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Weight"></label>
+            <input asp-for="Weight" class="form-control  form-control-sm" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Height"></label>
+            <input asp-for="Height" class="form-control  form-control-sm" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Diameter"></label>
+            <input asp-for="Diameter" class="form-control  form-control-sm" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Cost"></label>
+            <input asp-for="Cost" class="form-control  form-control-sm" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Stages"></label>
+            <input asp-for="Stages" class="form-control  form-control-sm" />
+        </div>
+        <div class="form-group">
+            <label asp-for="MassToLEO"></label>
+            <input asp-for="MassToLEO" class="form-control  form-control-sm" />
+        </div>
+        <div class="form-group">
+            <label asp-for="MassToGTO"></label>
+            <input asp-for="MassToGTO" class="form-control  form-control-sm" />
+        </div>
+        <div class="form-group">
+            <label asp-for="EngineType"></label>
+            <input asp-for="EngineType" class="form-control  form-control-sm" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Сохранить" class="btn btn-outline-secondary" />
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-controller="Rocket" asp-action="Index">Вернуться к списку</a>
+</div>
