@@ -16,5 +16,6 @@ namespace RocketSite.Common.Models
         public DateTime EndDate { get; set; }
         public Rocket Rocket { get; set; }
         public List<Resources> Resources { get; set; }
+        public List<Cargo> CargoList { get; set; }
     }
 }
