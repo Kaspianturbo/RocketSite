@@ -13,14 +13,14 @@ namespace RocketSite.Common.Repositories
 {
     public class RocketRepository : ICRUDRepository<Rocket>
     {
-        private readonly string connectionString;
-        public RocketRepository(string _connectionString)
+        private readonly string _connectionString;
+        public RocketRepository(string connectionString)
         {
-            connectionString = _connectionString;
+            _connectionString = connectionString;
         }
         public void Create(Rocket user)
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 var sqlQuery = $"INSERT INTO Rocket (name, version, weight, height, diameter, cost, stages, massToLEO, massToGTO, engineType) " +
                     "VALUES(@Name, @Version, @Weight, @Height, @Diameter, @Cost, @Stages, @MassToLEO, @MassToGTO, @EngineType)";
@@ -30,7 +30,7 @@ namespace RocketSite.Common.Repositories
 
         public void Delete(Rocket @object)
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 var sqlQuery = "DELETE FROM Rocket WHERE name = @Name AND version = @Version";
                 db.Execute(sqlQuery, @object);
@@ -39,7 +39,7 @@ namespace RocketSite.Common.Repositories
 
         public Rocket Get(Rocket @object)
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 return db.Query<Rocket>("SELECT * FROM Rocket WHERE name = @Name AND version = @Version", @object).FirstOrDefault();
             }
@@ -47,7 +47,7 @@ namespace RocketSite.Common.Repositories
 
         public List<Rocket> GetObjects()
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 return db.Query<Rocket>("SELECT * FROM Rocket").ToList();
             }
@@ -55,7 +55,7 @@ namespace RocketSite.Common.Repositories
 
         public void Update(Rocket rocket, Key key)
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 var sqlQuery = $"UPDATE Rocket SET " +
                     $"name = @Name, " +

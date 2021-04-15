@@ -1,0 +1,56 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model RocketSite.Common.Models.Employee
+@{
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+
+    <form asp-action="Create" asp-controller="Employee" method="post">
+        <div>
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input type="text" asp-for="Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Country"></label>
+                <input asp-for="Country" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Education"></label>
+                <input asp-for="Education" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Sex"></label>
+                <input asp-for="Sex" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Profession"></label>
+                <input asp-for="Profession" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TrainingProgram.Name"></label>
+                <input asp-for="TrainingProgram.Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TrainingProgram.Coach"></label>
+                <input asp-for="TrainingProgram.Coach" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Cosmodrome.Name"></label>
+                <input asp-for="Cosmodrome.Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-outline-secondary" />
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <a asp-controller="Employee" asp-action="Index">Вернуться к списку</a>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

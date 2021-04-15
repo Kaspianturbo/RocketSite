@@ -12,7 +12,8 @@ namespace RocketSite.Common.Models
         public string Country { get; set; }
         public string Education { get; set; }
         public SexOption Sex { get; set; }
-        public int Profession { get; set; }
+        public string Profession { get; set; }
         public TrainingProgram TrainingProgram { get; set; }
+        public Cosmodrome Cosmodrome { get; set; }
     }
 }

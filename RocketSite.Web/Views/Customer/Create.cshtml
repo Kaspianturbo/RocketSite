@@ -1,27 +1,22 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model RocketSite.Common.Models.Cargo
-
+@model RocketSite.Common.Models.Customer
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <div class="container">
         <h2>@ViewData["Title"]</h2>
 
-        <form asp-action="Create" asp-controller="Cargo" method="post">
+        <form asp-action="Create" asp-controller="Customer" method="post">
             <div>
                 <div class="form-group">
                     <label asp-for="Name"></label>
                     <input type="text" asp-for="Name" class="form-control form-control-sm" />
                 </div>
                 <div class="form-group">
-                    <label asp-for="Type"></label>
-                    <input asp-for="Type" class="form-control  form-control-sm" />
+                    <label asp-for="Country"></label>
+                    <input asp-for="Country" class="form-control  form-control-sm" />
                 </div>
                 <div class="form-group">
-                    <label asp-for="Weight"></label>
-                    <input asp-for="Weight" class="form-control  form-control-sm" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="Emaunt"></label>
-                    <input asp-for="Emaunt" class="form-control  form-control-sm" />
+                    <label asp-for="TotalWorth"></label>
+                    <input asp-for="TotalWorth" class="form-control  form-control-sm" />
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Сохранить" class="btn btn-outline-secondary" />
@@ -30,7 +25,7 @@
         </form>
 
         <div>
-            <a asp-controller="Cargo" asp-action="Index">Вернуться к списку</a>
+            <a asp-controller="Customer" asp-action="Index">Вернуться к списку</a>
         </div>
     </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -11,58 +11,57 @@ using System.Threading.Tasks;
 
 namespace RocketSite.Common.Repositories
 {
-    public class LocationRepository : ICRUDRepository<Location>
+    public class CustomerRepository : ICRUDRepository<Customer>
     {
         private readonly string _connectionString;
-        public LocationRepository(string connectionString)
+        public CustomerRepository(string connectionString)
         {
             _connectionString = connectionString;
         }
-        public void Create(Location @object)
+        public void Create(Customer @object)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = $"INSERT INTO Location (latitude, longitude, Country, City) " +
-                    "VALUES(@Latitude, @Longitude, @Country, @City)";
+                var sqlQuery = $"INSERT INTO Customer (name, country, totalWortht) " +
+                    "VALUES(@Name, @Country, @TotalWortht)";
                 db.Execute(sqlQuery, @object);
             }
         }
 
-        public void Delete(Location @object)
+        public void Delete(Customer @object)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = "DELETE FROM Location WHERE latitude = @Latitude AND longitude = @Longitude";
+                var sqlQuery = "DELETE FROM Customer WHERE name = @Name AND country = @Country";
                 db.Execute(sqlQuery, @object);
             }
         }
 
-        public Location Get(Location @object)
+        public Customer Get(Customer @object)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Location>("SELECT * FROM Location WHERE latitude = @Latitude AND longitude = @Longitude", @object).FirstOrDefault();
+                return db.Query<Customer>("SELECT * FROM Customer WHERE name = @Name AND country = @Country", @object).FirstOrDefault();
             }
         }
 
-        public List<Location> GetObjects()
+        public List<Customer> GetObjects()
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Location>("SELECT * FROM Location").ToList();
+                return db.Query<Customer>("SELECT * FROM Customer").ToList();
             }
         }
 
-        public void Update(Location @object, Key key)
+        public void Update(Customer @object, Key key)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = $"UPDATE Location SET " +
-                    $"latitude = @Latitude, " +
-                    $"longitude = @Longitude, " +
-                    $"Country = @Country, " +
-                    $"City = @City " +
-                    $"WHERE latitude = {key.First} AND longitude = {key.Second}";
+                var sqlQuery = $"UPDATE Customer SET " +
+                    $"name = @Name, " +
+                    $"country = @Country, " +
+                    $"totalWorth = @TotalWorth, " +
+                    $"WHERE name = \'{key.First}\' AND country = \'{key.Second}\'";
                 db.Execute(sqlQuery, @object);
             }
         }

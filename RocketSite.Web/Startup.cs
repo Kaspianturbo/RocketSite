@@ -23,6 +23,15 @@ namespace RocketSite.Web
             services.AddTransient<ICRUDRepository<Rocket>, RocketRepository>(provider => new RocketRepository(connectionString));
             services.AddTransient<ICRUDRepository<Location>, LocationRepository>(provider => new LocationRepository(connectionString));
             services.AddTransient<ICRUDRepository<Cargo>, CargoRepository>(provider => new CargoRepository(connectionString));
+            services.AddTransient<ICRUDRepository<Customer>, CustomerRepository>(provider => new CustomerRepository(connectionString));
+            services.AddTransient<ICRUDRepository<Employee>, EmployeeRepository>(provider => new EmployeeRepository(connectionString));
+            services.AddTransient<ICRUDRepository<TrainingProgram>, TrainingProgramRepository>(provider => new TrainingProgramRepository(connectionString));
+            services.AddTransient<ICRUDRepository<Resources>, ResourcesRepository>(provider => new ResourcesRepository(connectionString));
+            services.AddTransient<ICRUDRepository<Equipment>, EquipmentRepository>(provider => new EquipmentRepository(connectionString));
+            services.AddTransient<ICRUDRepository<Cosmodrome>, CosmodromeRepository>(provider => new CosmodromeRepository(connectionString));
+            services.AddTransient<ICRUDRepository<Purchase>, PurchaseRepository>(provider => new PurchaseRepository(connectionString));
+            services.AddTransient<ICRUDRepository<SpaceMission>, SpaceMissionRepository>(provider => new SpaceMissionRepository(connectionString));
+            
             services.AddControllersWithViews();
         }
 

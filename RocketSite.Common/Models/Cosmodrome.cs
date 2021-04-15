@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RocketSite.Common.Models
 {
-    public class Сosmodrome
+    public class Cosmodrome
     {
         public string Name { get; set; }
         public string Timezone { get; set; }

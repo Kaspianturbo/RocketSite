@@ -10,6 +10,7 @@ namespace RocketSite.Common.Models
         public string Name { get; set; }
         public Resources Resources { get; set; }
         public string Cost { get; set; }
+        public SpaceMission SpaceMission { get; set; }
         public Employee Employee { get; set; }
     }
 }

@@ -8,61 +8,62 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RocketSite.Common.Options;
 
 namespace RocketSite.Common.Repositories
 {
-    public class CargoRepository : ICRUDRepository<Cargo>
+    public class ResourcesRepository : ICRUDRepository<Resources>
     {
         private readonly string _connectionString;
-        public CargoRepository(string connectionString)
+        public ResourcesRepository(string connectionString)
         {
             this._connectionString = connectionString;
         }
-        public void Create(Cargo @object)
+        public void Create(Resources @object)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = $"INSERT INTO Cargo (name, type, weight, emaunt) " +
-                    "VALUES(@Name, @Type, @Weight, @Emaunt)";
+                var sqlQuery = $"INSERT INTO Resources (name, type, emaunt, cost) " +
+                    "VALUES(@Name, @Type, @Emaunt, @Cost)";
                 db.Execute(sqlQuery, @object);
             }
         }
 
-        public void Delete(Cargo @object)
+        public void Delete(Resources @object)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = "DELETE FROM Cargo WHERE name = @Name AND type = @Type";
+                var sqlQuery = "DELETE FROM Resources WHERE name = @Name AND type = @Type";
                 db.Execute(sqlQuery, @object);
             }
         }
 
-        public Cargo Get(Cargo @object)
+        public Resources Get(Resources @object)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Cargo>("SELECT * FROM Cargo WHERE name = @Name AND type = @Type", @object).FirstOrDefault();
+                return db.Query<Resources>("SELECT * FROM Resources WHERE name = @Name AND type = @Type", @object).FirstOrDefault();
             }
         }
 
-        public List<Cargo> GetObjects()
+        public List<Resources> GetObjects()
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Cargo>("SELECT * FROM Cargo").ToList();
+                return db.Query<Resources>("SELECT * FROM Resources").ToList();
             }
         }
 
-        public void Update(Cargo @object, Key key)
+        public void Update(Resources @object, Key key)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = $"UPDATE Cargo SET " +
+                var sqlQuery = $"UPDATE Resources SET " +
                     $"name = @Name, " +
                     $"type = @Type, " +
-                    $"weight = @Weight, " +
-                    $"emaunt = @Emaunt " +
-                    $"WHERE name = \'{key.First}\' AND type = \'{key.Second}\'";
+                    $"emaunt = @Emaunt, " +
+                    $"cost = @Cost " +
+                    $"WHERE name = \'{key.First}\' AND type = {(int)Enum.Parse(typeof(ResourceOption), key.Second)}";
                 db.Execute(sqlQuery, @object);
             }
         }

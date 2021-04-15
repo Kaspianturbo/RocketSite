@@ -1,38 +1,33 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model IEnumerable<RocketSite.Common.Models.Location>
+@model IEnumerable<RocketSite.Common.Models.Customer>
 @{ }
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <div class="container">
-    <h2>Location</h2>
+    <h2>Customer</h2>
     <p>
-        <a asp-controller="Location" asp-action="Create">Добавити</a>
+        <a asp-controller="Customer" asp-action="Create">Добавити</a>
     </p>
     <table class="table">
         <tr>
-            <th>Latitude</th>
-            <th>Longitude</th>
+            <th>Name</th>
             <th>Country</th>
-            <th>City</th>
-            <th></th>
+            <th>TotalWorth</th>
         </tr>
 
         @foreach (var item in Model)
         {
 <tr>
-    <td>@item.Latitude</td>
-    <td>
-        @item.Longitude
-    </td>
+    <td>@item.Name</td>
     <td>
         @item.Country
     </td>
     <td>
-        @item.City
+        @item.TotalWorth
     </td>
     <td>
-        <a asp-controller="Location" asp-action="Edit" asp-route-latitude="@item.Latitude" asp-route-longitude="@item.Longitude">Змінити</a> |
-        <a asp-controller="Location" asp-action="Delete" asp-route-latitude="@item.Latitude" asp-route-longitude="@item.Longitude">Видалити</a>
+        <a asp-controller="Customer" asp-action="Edit" asp-route-name="@item.Name" asp-route-country="@item.Country">Змінити</a> |
+        <a asp-controller="Customer" asp-action="Delete" asp-route-name="@item.Name" asp-route-country="@item.Country">Видалити</a>
     </td>
 </tr>
 }
