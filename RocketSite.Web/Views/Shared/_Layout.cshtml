@@ -1,0 +1,68 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" asp-controller="RocketSite" asp-action="Index"><div class="form-inline"><img src="https://www.iconpacks.net/icons/2/free-rocket-icon-3432-thumb.png" alt="Index" width="80" height="80" /><h2>RocketSite</h2></div></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Cargo" asp-action="Index">Cargo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Cosmodrome" asp-action="Index">Cosmodrome</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Customer" asp-action="Index">Customer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Employee" asp-action="Index">Employee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Equipment" asp-action="Index">Equipment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Location" asp-action="Index">Location</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Purchase" asp-action="Index">Purchase</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Resources" asp-action="Index">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Rocket" asp-action="Index">Rocket</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="SpaceMission" asp-action="Index">SpaceMission</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="TrainingProgram" asp-action="Index">TrainingProgram</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="RocketSite" asp-action="Index">Requests</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <a href="https://github.com/Kaspianturbo/RocketSite"><img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png" alt="git" width="40" height="40" /></a>
+                </form>
+            </div>
+        </nav>
+        @RenderBody()
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
