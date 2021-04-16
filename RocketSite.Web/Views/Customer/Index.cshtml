@@ -13,23 +13,27 @@
             <th>Name</th>
             <th>Country</th>
             <th>TotalWorth</th>
+            <th>SpaceMissionName</th>
         </tr>
 
         @foreach (var item in Model)
         {
-<tr>
-    <td>@item.Name</td>
-    <td>
-        @item.Country
-    </td>
-    <td>
-        @item.TotalWorth
-    </td>
-    <td>
-        <a asp-controller="Customer" asp-action="Edit" asp-route-name="@item.Name" asp-route-country="@item.Country">Змінити</a> |
-        <a asp-controller="Customer" asp-action="Delete" asp-route-name="@item.Name" asp-route-country="@item.Country">Видалити</a>
-    </td>
-</tr>
+    <tr>
+        <td>@item.Name</td>
+        <td>
+            @item.Country
+        </td>
+        <td>
+            @item.TotalWorth
+        </td>
+        <td>
+            @item.SpaceMissionName
+        </td>
+        <td>
+            <a asp-controller="Customer" asp-action="Edit" asp-route-name="@item.Name" asp-route-country="@item.Country">Змінити</a> |
+            <a asp-controller="Customer" asp-action="Delete" asp-route-name="@item.Name" asp-route-country="@item.Country">Видалити</a>
+        </td>
+    </tr>
 }
     </table>
 </div>

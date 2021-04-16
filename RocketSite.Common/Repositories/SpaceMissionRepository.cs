@@ -79,21 +79,20 @@ namespace RocketSite.Common.Repositories
                 StringBuilder builder = new StringBuilder();
                 builder.Append($"UPDATE SpaceMission SET " +
                                $"name = @Name, " +
-                               $"country = @Country, " +
-                               $"education = @Education, " +
-                               $"sex = @Sex, " +
-                               $"profession = @Profession ");
-                builder.Append($"WHERE name = \'{key.First}\' AND country = \'{key.Second}\'");
+                               $"statys = @Statys, " +
+                               $"cost = @Cost, " +
+                               $"altitude = @Altitude, " +
+                               $"startDate = @StartDate, " +
+                               $"endDate = @EndDate ");
+                builder.Append($"WHERE name = \'{key.First}\'");
                 db.Execute(builder.ToString(), new
                 {
                     Name = @object.Name,
                     Statys = @object.Status,
                     Cost = @object.Cost,
-                    Aititude = @object.Altitude,
+                    Altitude = @object.Altitude,
                     StartDate = @object.StartDate,
-                    EndDate = @object.EndDate,
-                    RocketName = @object.Rocket.Name,
-                    RocketVersion = @object.Rocket.Version
+                    EndDate = @object.EndDate
                 });
             }
         }

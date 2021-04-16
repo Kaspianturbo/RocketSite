@@ -22,8 +22,8 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = $"INSERT INTO Customer (name, country, totalWortht) " +
-                    "VALUES(@Name, @Country, @TotalWortht)";
+                var sqlQuery = $"INSERT INTO Customer (name, country, totalWortht, spaceMissionName) " +
+                    "VALUES(@Name, @Country, @TotalWortht, @SpaceMissionName)";
                 db.Execute(sqlQuery, @object);
             }
         }
@@ -61,6 +61,7 @@ namespace RocketSite.Common.Repositories
                     $"name = @Name, " +
                     $"country = @Country, " +
                     $"totalWorth = @TotalWorth, " +
+                    $"spaceMissionName = @SpaceMissionName " +
                     $"WHERE name = \'{key.First}\' AND country = \'{key.Second}\'";
                 db.Execute(sqlQuery, @object);
             }

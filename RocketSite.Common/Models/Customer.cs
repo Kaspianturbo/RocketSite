@@ -10,5 +10,6 @@ namespace RocketSite.Common.Models
         public string Name { get; set; }
         public string Country { get; set; }
         public int TotalWorth { get; set; }
+        public string SpaceMissionName { get; set; }
     }
 }

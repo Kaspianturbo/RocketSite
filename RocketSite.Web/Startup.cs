@@ -31,6 +31,7 @@ namespace RocketSite.Web
             services.AddTransient<ICRUDRepository<Cosmodrome>, CosmodromeRepository>(provider => new CosmodromeRepository(connectionString));
             services.AddTransient<ICRUDRepository<Purchase>, PurchaseRepository>(provider => new PurchaseRepository(connectionString));
             services.AddTransient<ICRUDRepository<SpaceMission>, SpaceMissionRepository>(provider => new SpaceMissionRepository(connectionString));
+            services.AddTransient<IRocketSiteRepository, RocketSiteRepository>(provider => new RocketSiteRepository(connectionString));
             
             services.AddControllersWithViews();
         }
