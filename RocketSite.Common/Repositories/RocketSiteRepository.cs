@@ -24,7 +24,7 @@ namespace RocketSite.Common.Repositories
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 return db.Query<Response1>(
-                    "SELECT s.name as missionName, s.cost as missionCost, s.altitude, s.startDate, s.endDate, s.rocketName, c.name as customerCountry, r.name as rocketName FROM SpaceMission as s " +
+                    "SELECT s.name as missionName, s.cost as missionCost, s.altitude, s.startDate, s.endDate, s.rocketName, c.name as customerName, r.name as rocketName FROM SpaceMission as s " +
                     "JOIN Customer as c ON s.name = c.spaceMissionName " +
                     "JOIN Rocket as r ON s.rocketName = r.name AND s.rocketVersion = r.version " +
                     "WHERE s.startDate = @StartDate " +

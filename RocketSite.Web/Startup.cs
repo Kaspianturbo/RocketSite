@@ -50,7 +50,7 @@ namespace RocketSite.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Rocket}/{action=Index}/{name?}");
+                    pattern: "{controller=RocketSite}/{action=Index}/{name?}");
             });
         }
     }
