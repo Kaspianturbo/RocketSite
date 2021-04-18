@@ -12,6 +12,7 @@ namespace RocketSite.Common.Models
         public CargoOption Type { get; set; }
         public int Weight { get; set; }
         public int Emaunt { get; set; }
+        public SpaceMission SpaceMission { get; set; }
         public Customer Customer { get; set; }
     }
 }

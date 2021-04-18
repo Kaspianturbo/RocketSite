@@ -2,6 +2,9 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using RocketSite.Common.Options
+@using RocketSite.Common.Repositories
+@inject RocketSite.Common.Repositories.CustomerRepository CustomerRepository
 @model RocketSite.Common.Models.Cargo
 
 <div class="container">
@@ -15,7 +18,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="Type"></label>
-                <input asp-for="Type" class="form-control  form-control-sm" />
+                <select asp-for="Type" class="form-control  form-control-sm"
+                        asp-items="Html.GetEnumSelectList<CargoOption>()">
+                    <option>Select type ...</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Weight"></label>
@@ -24,6 +30,25 @@
             <div class="form-group">
                 <label asp-for="Emaunt"></label>
                 <input asp-for="Emaunt" class="form-control  form-control-sm" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Customer.Name"></label>
+                <select asp-for="Customer.Name" class="form-control  form-control-sm"
+                        asp-items="new List<SelectListItem>()">
+                    <option>Select type ...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Customer.Name"></label>
+                <input asp-for="Customer.Name" class="form-control  form-control-sm" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Customer.Country"></label>
+                <input asp-for="Customer.Country" class="form-control  form-control-sm" />
+            </div>
+            <div class="form-group">
+                <label asp-for="SpaceMission.Name"></label>
+                <input asp-for="SpaceMission.Name" class="form-control  form-control-sm" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Сохранить" class="btn btn-outline-secondary" />

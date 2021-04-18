@@ -18,7 +18,8 @@ namespace RocketSite.Web.Controllers
         }
         public ActionResult Index()
         {
-            return View(_repository.GetObjects());
+            var resp = _repository.GetObjects();
+            return View(resp);
         }
 
         public ActionResult Details(string name, CargoOption type)

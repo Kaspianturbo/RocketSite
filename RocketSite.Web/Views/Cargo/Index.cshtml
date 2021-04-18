@@ -14,26 +14,38 @@
             <th>Type</th>
             <th>Weight</th>
             <th>Emaunt</th>
+            <th>Customer.Name</th>
+            <th>Customer.Country</th>
+            <th>SpaceMission.Name</th>
         </tr>
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.Name</td>
-                <td>
-                    @item.Type
-                </td>
-                <td>
-                    @item.Weight
-                </td>
-                <td>
-                    @item.Emaunt
-                </td>
-                <td>
-                    <a asp-controller="Cargo" asp-action="Edit" asp-route-name="@item.Name" asp-route-type="@item.Type">Edit</a> |
-                    <a asp-controller="Cargo" asp-action="Delete" asp-route-name="@item.Name" asp-route-type="@item.Type">Delete</a>
-                </td>
-            </tr>
+    <tr>
+        <td>@item.Name</td>
+        <td>
+            @item.Type
+        </td>
+        <td>
+            @item.Weight
+        </td>
+        <td>
+            @item.Emaunt
+        </td>
+        <td>
+            @item.Customer.Name
+        </td>
+        <td>
+            @item.Customer.Country
+        </td>
+        <td>
+            @item.SpaceMission.Name
+        </td>
+        <td>
+            <a asp-controller="Cargo" asp-action="Edit" asp-route-name="@item.Name" asp-route-type="@item.Type">Edit</a> |
+            <a asp-controller="Cargo" asp-action="Delete" asp-route-name="@item.Name" asp-route-type="@item.Type">Delete</a>
+        </td>
+    </tr>
         }
     </table>
 </div>
