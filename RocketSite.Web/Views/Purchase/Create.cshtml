@@ -1,32 +1,36 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model RocketSite.Common.Models.Equipment
+@using RocketSite.Common.Options
+@model RocketSite.Common.Models.Purchase
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
-    <h2>Create Equipment</h2>
+    <h2>Create Purchase</h2>
 
-    <form asp-action="Create" asp-controller="Equipment" method="post">
+    <form asp-action="Create" asp-controller="Purchase" method="post">
         <div>
             <div class="form-group">
                 <label asp-for="Name"></label>
                 <input type="text" asp-for="Name" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Producer"></label>
-                <input asp-for="Producer" class="form-control" />
+                <label asp-for="Resources.Name">Resource name</label>
+                <input asp-for="Resources.Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Resources.Type">Resource type</label>
+                <select asp-for="Resources.Type" class="form-control  form-control-sm"
+                        asp-items="Html.GetEnumSelectList<CargoOption>()">
+                    <option>Select type ...</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Cost"></label>
                 <input asp-for="Cost" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Rocket.Name"></label>
-                <input asp-for="Rocket.Name" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Rocket.Version"></label>
-                <input asp-for="Rocket.Version" class="form-control" />
+                <label asp-for="SpaceMission.Name">Mission name</label>
+                <input asp-for="SpaceMission.Name" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-outline-secondary" />
@@ -35,6 +39,6 @@
     </form>
 
     <div>
-        <a asp-controller="Equipment" asp-action="Index">Back to list</a>
+        <a asp-controller="Purchase" asp-action="Index">Back to list</a>
     </div>
 </div>

@@ -11,7 +11,7 @@ namespace RocketSite.Web.Controllers
 {
     public class ResourcesController : Controller
     {
-        ICRUDRepository<Resources> _repository;
+        private  readonly ICRUDRepository<Resources> _repository;
         public ResourcesController(ICRUDRepository<Resources> repository)
         {
             _repository = repository;
@@ -21,9 +21,9 @@ namespace RocketSite.Web.Controllers
             return View(_repository.GetObjects());
         }
 
-        public ActionResult Details(string name, ResourceOption type)
+        public ActionResult Details(Resources @object)
         {
-            Resources user = _repository.Get(new Resources { Name = name, Type = type });
+            Resources user = _repository.Get(@object);
             if (user != null)
                 return View(user);
             return NotFound();
@@ -35,15 +35,15 @@ namespace RocketSite.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Resources cargo)
+        public ActionResult Create(Resources @object)
         {
-            _repository.Create(cargo);
+            _repository.Create(@object);
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit(string name, ResourceOption type)
+        public ActionResult Edit(Resources @object)
         {
-            Resources user = _repository.Get(new Resources { Name = name, Type = type });
+            Resources user = _repository.Get(@object);
             if (user != null)
                 return View(user);
             return NotFound();
@@ -56,9 +56,9 @@ namespace RocketSite.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Delete(string name, ResourceOption type)
+        public ActionResult Delete(Resources @object)
         {
-            _repository.Delete(new Resources { Name = name, Type = type });
+            _repository.Delete(@object);
             return RedirectToAction("Index");
         }
     }

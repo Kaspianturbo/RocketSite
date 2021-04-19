@@ -41,20 +41,35 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<TrainingProgram>("SELECT * FROM TrainingProgram WHERE name = @Name AND coach = @Coach", @object).FirstOrDefault();
-            }
-        }
+                var itemList = db.Query("SELECT * FROM TrainingProgram WHERE name = @Name AND coach = @Coach", @object);
 
-        public List<string> GetKeys()
-        {
-            throw new NotImplementedException();
+                return (from item in itemList
+                    select new TrainingProgram
+                    {
+                        Name = item.name,
+                        Area = item.area,
+                        Coach = item.coach,
+                        Cost = item.cost,
+                        Duration = item.duration
+                    }).FirstOrDefault();
+            }
         }
 
         public List<TrainingProgram> GetObjects()
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<TrainingProgram>("SELECT * FROM TrainingProgram").ToList();
+                var itemList = db.Query("SELECT * FROM TrainingProgram");
+
+                return (from item in itemList
+                    select new TrainingProgram
+                    {
+                        Name = item.name,
+                        Area = item.area,
+                        Coach = item.coach,
+                        Cost = item.cost,
+                        Duration = item.duration
+                    }).ToList();
             }
         }
 
@@ -68,8 +83,12 @@ namespace RocketSite.Common.Repositories
                     $"coach = @Coach, " +
                     $"cost = @Cost, " +
                     $"duration = @Duration " +
-                    $"WHERE name = \'{key.First}\' AND coach = \'{key.Second}\'";
-                db.Execute(sqlQuery, @object);
+                    $"WHERE name = @Key1 AND coach = @Key2";
+                db.Execute(sqlQuery, new
+                {
+                    @object.Name, @object.Area, @object.Coach, @object.Cost, 
+                    @object.Duration, Key1 = key.First, Key2 = key.Second
+                });
             }
         }
     }

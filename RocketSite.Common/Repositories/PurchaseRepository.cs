@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RocketSite.Common.Options;
 
 namespace RocketSite.Common.Repositories
 {
@@ -22,18 +23,16 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = $"INSERT INTO Purchase (name, resourceName, resourceType, cost, spaceMissionName, employeeName, employeeCountry) " +
-                    "VALUES(@Name, @ResourceName, @ResourceType, @Cost, @SpaceMissionName, @EmployeeName, @EmployeeCountry)";
+                var sqlQuery = $"INSERT INTO Purchase (name, resourceName, resourceType, cost, spaceMissionName) " +
+                    "VALUES(@Name, @ResourceName, @ResourceType, @Cost, @SpaceMissionName)";
                 db.Execute(sqlQuery,
                     new
                     {
-                        Name = @object.Name,
+                        @object.Name,
                         ResourceName = @object.Resources.Name,
                         ResourceType = @object.Resources.Type,
-                        Cost = @object.Cost,
+                        @object.Cost,
                         SpaceMissionName = @object.SpaceMission.Name,
-                        //EmployeeName = @object.Employee.Name,
-                        //EmployeeCountry = @object.Employee.Country
                     });
             }
         }
@@ -42,8 +41,8 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = "DELETE FROM Purchase WHERE name = @Name AND employeeName = @EmployeeName";
-                db.Execute(sqlQuery, new { Name = @object.Name/*, EmployeeName = @object.Employee.Name*/});
+                var sqlQuery = "DELETE FROM Purchase WHERE name = @Name AND cost = @Cost";
+                db.Execute(sqlQuery, @object);
             }
         }
 
@@ -51,23 +50,37 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Purchase>(
-                    "SELECT * FROM Purchase WHERE name = @Name AND employeeName = @EmployeeName", 
-                    new { Name = @object.Name, /*EmployeeName = @object.Employee.Name */}
-                    ).FirstOrDefault();
-            }
-        }
+                var itemList = db.Query("SELECT * FROM Purchase WHERE name = @Name AND cost = @Cost", @object);
 
-        public List<string> GetKeys()
-        {
-            throw new NotImplementedException();
+                return (from item in itemList
+                        let spaceMission = new SpaceMission { Name = item.spaceMissionName }
+                        let resource = new Resources { Name = item.resourceName, Type = Enum.Parse<ResourceOption>(item.resourceType) }
+                        select new Purchase
+                    {
+                        Name = item.name,
+                        Resources = resource,
+                        Cost = item.cost,
+                        SpaceMission = spaceMission
+                    }).FirstOrDefault();
+            }
         }
 
         public List<Purchase> GetObjects()
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Purchase>("SELECT * FROM Purchase").ToList();
+                var itemList = db.Query("SELECT * FROM Purchase");
+
+                return (from item in itemList
+                    let spaceMission = new SpaceMission { Name = item.spaceMissionName }
+                    let resource = new Resources { Name = item.resourceName, Type = Enum.Parse<ResourceOption>(item.resourceType) }
+                    select new Purchase
+                    {
+                        Name = item.name,
+                        Resources = resource,
+                        Cost = item.cost,
+                        SpaceMission = spaceMission
+                    }).ToList();
             }
         }
 
@@ -80,19 +93,16 @@ namespace RocketSite.Common.Repositories
                     $"resourceName = @ResourceName, " +
                     $"resourceType = @ResourceType, " +
                     $"cost = @Cost, " +
-                    $"spaceMissionName = @SpaceMissionName, " +
-                    $"employeeName = @EmployeeName, " +
-                    $"employeeCountry = @EmployeeCountry " +
-                    $"WHERE name = \'{key.First}\' AND employeeName = \'{key.Second}\'";
+                    $"spaceMissionName = @SpaceMissionName " +
+                    $"WHERE name = @Key1 AND cost = @Key2";
                 db.Execute(sqlQuery, new
                 {
-                    Name = @object.Name,
+                    @object.Name,
                     ResourceName = @object.Resources.Name,
                     ResourceType = @object.Resources.Type,
-                    Cost = @object.Cost,
+                    @object.Cost,
                     SpaceMissionName = @object.SpaceMission.Name,
-                    //EmployeeName = @object.Employee.Name,
-                    //EmployeeCountry = @object.Employee.Country
+                    Key1 = key.First, Key2 = key.Second
                 });
             }
         }

@@ -3,42 +3,50 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <div class="container">
     <h2>Resources</h2>
     <p>
         <a asp-controller="Resources" asp-action="Create">Добавити</a>
     </p>
     <table class="table">
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Emaunt</th>
-            <th>Cost</th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+        <thead>
             <tr>
-                <td>@item.Name</td>
-                <td>
-                    @item.Type
-                </td>
-                <td>
-                    @item.Emaunt
-                </td>
-                <td>
-                    @item.Cost
-                </td>
-                <td>
-                    <a asp-controller="Resources" asp-action="Edit" asp-route-name="@item.Name" asp-route-type="@item.Type">Змінити</a> |
-                    <a asp-controller="Resources" asp-action="Delete" asp-route-name="@item.Name" asp-route-type="@item.Type">Видалити</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Emaunt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cost)
+                </th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Emaunt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cost)
+                    </td>
+                    <td>
+                        <a asp-controller="Resources" asp-action="Edit" asp-route-name="@item.Name" asp-route-type="@item.Type">Edit</a> |
+                        <a asp-controller="Resources" asp-action="Delete" asp-route-name="@item.Name" asp-route-type="@item.Type">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

@@ -42,20 +42,33 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Resources>("SELECT * FROM Resources WHERE name = @Name AND type = @Type", @object).FirstOrDefault();
-            }
-        }
+                var itemList = db.Query("SELECT * FROM Resources WHERE name = @Name AND type = @Type", @object);
 
-        public List<string> GetKeys()
-        {
-            throw new NotImplementedException();
+                return (from item in itemList
+                    select new Resources
+                    {
+                        Name = item.name,
+                        Type = Enum.Parse<ResourceOption>(item.type),
+                        Emaunt = item.emaunt,
+                        Cost = item.cost
+                    }).FirstOrDefault();
+            }
         }
 
         public List<Resources> GetObjects()
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Resources>("SELECT * FROM Resources").ToList();
+                var itemList = db.Query("SELECT * FROM Resources");
+
+                return (from item in itemList
+                    select new Resources
+                    {
+                        Name = item.name,
+                        Type = Enum.Parse<ResourceOption>(item.type),
+                        Emaunt = item.emaunt,
+                        Cost = item.cost
+                    }).ToList();
             }
         }
 
@@ -68,8 +81,12 @@ namespace RocketSite.Common.Repositories
                     $"type = @Type, " +
                     $"emaunt = @Emaunt, " +
                     $"cost = @Cost " +
-                    $"WHERE name = \'{key.First}\' AND type = {(int)Enum.Parse(typeof(ResourceOption), key.Second)}";
-                db.Execute(sqlQuery, @object);
+                    $"WHERE name = @Key1 AND type = @Key2";
+                db.Execute(sqlQuery, new
+                {
+                    @object.Name, @object.Type, @object.Cost, 
+                    @object.Emaunt, Key1 = key.First, Key2 = Enum.Parse<ResourceOption>(key.Second)
+                });
             }
         }
     }

@@ -11,7 +11,7 @@ namespace RocketSite.Web.Controllers
 {
     public class PurchaseController : Controller
     {
-        ICRUDRepository<Purchase> _repository;
+        private readonly ICRUDRepository<Purchase> _repository;
         public PurchaseController(ICRUDRepository<Purchase> repository)
         {
             _repository = repository;
@@ -21,9 +21,9 @@ namespace RocketSite.Web.Controllers
             return View(_repository.GetObjects());
         }
 
-        public ActionResult Details(string name,  string employeeName)
+        public ActionResult Details(Purchase @object)
         {
-            Purchase user = _repository.Get(new Purchase { Name = name, /*Employee = new Employee{Name = employeeName }*/});
+            Purchase user = _repository.Get(@object);
             if (user != null)
                 return View(user);
             return NotFound();
@@ -41,9 +41,9 @@ namespace RocketSite.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit(string name, string employeeName)
+        public ActionResult Edit(Purchase @object)
         {
-            Purchase user = _repository.Get(new Purchase { Name = name, /*Employee = new Employee { Name = employeeName }*/});
+            Purchase user = _repository.Get(@object);
             if (user != null)
                 return View(user);
             return NotFound();
@@ -56,9 +56,9 @@ namespace RocketSite.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Delete(string name, string employeeName)
+        public ActionResult Delete(Purchase @object)
         {
-            _repository.Delete(new Purchase { Name = name, /*Employee = new Employee { Name = employeeName }*/ });
+            _repository.Delete(@object);
             return RedirectToAction("Index");
         }
     }

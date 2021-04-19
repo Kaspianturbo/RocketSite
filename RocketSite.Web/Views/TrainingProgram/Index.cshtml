@@ -9,35 +9,50 @@
         <a asp-controller="TrainingProgram" asp-action="Create">Create</a>
     </p>
     <table class="table">
-        <tr>
-            <th>Name</th>
-            <th>Area</th>
-            <th>Coach</th>
-            <th>Cost</th>
-            <th>Duration</th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+        <thead>
             <tr>
-                <td>@item.Name</td>
-                <td>
-                    @item.Area
-                </td>
-                <td>
-                    @item.Coach
-                </td>
-                <td>
-                    @item.Cost
-                </td>
-                <td>
-                    @item.Duration
-                </td>
-                <td>
-                    <a asp-controller="TrainingProgram" asp-action="Edit" asp-route-name="@item.Name" asp-route-coach="@item.Coach">Edit</a> |
-                    <a asp-controller="TrainingProgram" asp-action="Delete" asp-route-name="@item.Name" asp-route-coach="@item.Coach">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Area)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Coach)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cost)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Duration)
+                </th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Area)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Coach)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Duration)
+                    </td>
+                    <td>
+                        <a asp-controller="TrainingProgram" asp-action="Edit" asp-route-name="@item.Name" asp-route-coach="@item.Coach">Edit</a> |
+                        <a asp-controller="TrainingProgram" asp-action="Delete" asp-route-name="@item.Name" asp-route-coach="@item.Coach">Delete</a>
+                    </td>
+                </tr>
+            }
+        <tbody>
     </table>
 </div>

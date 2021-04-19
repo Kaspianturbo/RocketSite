@@ -16,22 +16,16 @@
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
                 <th>
-                    ResourceName
+                    Resource @Html.DisplayNameFor(model => model.Resources.Name)
                 </th>
                 <th>
-                    ResourcesType
+                    Resource @Html.DisplayNameFor(model => model.Resources.Type)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Cost)
                 </th>
                 <th>
-                    SpaceMissionName
-                </th>
-                <th>
-                    EmployeeName
-                </th>
-                <th>
-                    EmployeeCountry
+                    Mission @Html.DisplayNameFor(model => model.SpaceMission.Name)
                 </th>
             </tr>
         </thead>
@@ -54,16 +48,11 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.SpaceMission.Name)
                     </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.Employee.Name)
-                    </td>
+
                     <td>
-                        @Html.DisplayFor(modelItem => item.Employee.Country)
+                        <a asp-controller="Purchase" asp-action="Edit" asp-route-name="@item.Name" asp-route-cost="@item.Cost">Edit</a> |
+                        <a asp-controller="Purchase" asp-action="Delete" asp-route-name="@item.Name" asp-route-cost="@item.Cost">Delete</a>
                     </td>
-                    <td>
-                        <a asp-controller="Purchase" asp-action="Edit" asp-route-name="@item.Name" asp-route-employeeName="@item.Employee.Name">Edit</a> |
-                        <a asp-controller="Purchase" asp-action="Delete" asp-route-name="@item.Name" asp-route-employeeName="@item.Employee.Name">Delete</a>
-                    </td>*@
                 </tr>
             }
         </tbody>
