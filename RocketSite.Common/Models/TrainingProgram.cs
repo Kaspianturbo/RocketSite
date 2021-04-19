@@ -12,5 +12,6 @@ namespace RocketSite.Common.Models
         public string Coach { get; set; }
         public int Cost { get; set; }
         public int Duration { get; set; }
+        public List<Employee> Employees { get; set; }
     }
 }

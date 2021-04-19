@@ -9,45 +9,80 @@
         <a asp-controller="Rocket" asp-action="Create">Добавити</a>
     </p>
     <table class="table">
-        <tr>
-            <th>Name</th>
-            <th>Version</th>
-            <th>Cost</th>
-            <th>Diameter</th>
-            <th>Height</th>
-            <th>MassToGTO</th>
-            <th>MassToLEO</th>
-            <th>EngineType</th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+        <thead>
             <tr>
-                <td>@item.Name</td>
-                <td>@item.Version</td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Version)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Weight)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Height)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Diameter)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cost)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Stages)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MassToLEO)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MassToGTO)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EngineType)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
                 <td>
-                    @item.Cost
+                    @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @item.Diameter
+                    @Html.DisplayFor(modelItem => item.Version)
                 </td>
                 <td>
-                    @item.Height
+                    @Html.DisplayFor(modelItem => item.Weight)
                 </td>
                 <td>
-                    @item.MassToGTO
+                    @Html.DisplayFor(modelItem => item.Height)
                 </td>
                 <td>
-                    @item.MassToLEO
+                    @Html.DisplayFor(modelItem => item.Diameter)
                 </td>
                 <td>
-                    @item.EngineType
+                    @Html.DisplayFor(modelItem => item.Cost)
                 </td>
                 <td>
-                    <a asp-controller="Rocket" asp-action="Edit" asp-route-name="@item.Name" asp-route-version="@item.Version">Save</a> |
+                    @Html.DisplayFor(modelItem => item.Stages)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MassToLEO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MassToGTO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EngineType)
+                </td>
+                <td>
+                    <a asp-controller="Rocket" asp-action="Edit" asp-route-name="@item.Name" asp-route-version="@item.Version">Edit</a> |
                     <a asp-controller="Rocket" asp-action="Delete" asp-route-name="@item.Name" asp-route-version="@item.Version">Delete</a>
                 </td>
             </tr>
-        }
+            }
+        </tbody>
     </table>
 </div>

@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using RocketSite.Common.Interfaces;
 using RocketSite.Common.Models;
+using RocketSite.Common.Options;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,8 +23,8 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = $"INSERT INTO Employee (name, country, education, sex, profession, nameTrainingProgram, coachTrainingProgram, cosmodromeName) " +
-                    "VALUES(@Name, @Country, @Education, @Sex, @Profession, @NameTrainingProgram, @CoachTrainingProgram, @CosmodromeName)";
+                var sqlQuery = $"INSERT INTO Employee (name, country, education, sex, profession, nameTrainingProgram, coachTrainingProgram) " +
+                    "VALUES(@Name, @Country, @Education, @Sex, @Profession, @NameTrainingProgram, @CoachTrainingProgram)";
                 db.Execute(sqlQuery,
                     new
                     {
@@ -33,8 +34,7 @@ namespace RocketSite.Common.Repositories
                         Sex = @object.Sex,
                         Profession = @object.Profession,
                         NameTrainingProgram = @object.TrainingProgram.Name,
-                        CoachTrainingProgram = @object.TrainingProgram.Coach,
-                        CosmodromeName = @object.Cosmodrome.Name
+                        CoachTrainingProgram = @object.TrainingProgram.Coach
                     });
             }
         }
@@ -52,7 +52,19 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Employee>("SELECT * FROM Employee WHERE name = @Name AND country = @Country", @object).FirstOrDefault();
+                var itemList = db.Query("SELECT * FROM Employee WHERE name = @Name", @object);
+
+                return (from item in itemList
+                        let trainingProgram = new TrainingProgram { Name = item.nameTrainingProgram, Coach = item.coachTrainingProgram }
+                        select new Employee
+                        {
+                            Name = item.name,
+                            Country = item.country,
+                            Education = item.education,
+                            Sex = Enum.Parse<SexOption>(item.sex),
+                            Profession = item.profession,
+                            TrainingProgram = trainingProgram
+                        }).FirstOrDefault();
             }
         }
 
@@ -60,17 +72,19 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                
+                var itemList = db.Query("SELECT * FROM Employee");
 
-                return db.Query<Employee, TrainingProgram, Employee>(
-                    "SELECT * FROM Employee as e LEFT JOIN TrainingProgram as t ON e.nameTrainingProgram = t.name AND e.coachTrainingProgram = t.coach",
-                    (e, t) =>
-                    {
-                        Employee employee = e;
-                        e.TrainingProgram = t;
-                        e.Cosmodrome = new Cosmodrome();
-                        return employee;
-                    }, splitOn: "nameTrainingProgram").ToList(); ;
+                return (from item in itemList
+                        let trainingProgram = new TrainingProgram { Name = item.nameTrainingProgram, Coach = item.coachTrainingProgram }
+                        select new Employee
+                        {
+                            Name = item.name,
+                            Country = item.country,
+                            Education = item.education,
+                            Sex = Enum.Parse<SexOption>(item.sex),
+                            Profession = item.profession,
+                            TrainingProgram = trainingProgram
+                        }).ToList();
             }
         }
 
@@ -84,15 +98,20 @@ namespace RocketSite.Common.Repositories
                                $"country = @Country, " +
                                $"education = @Education, " +
                                $"sex = @Sex, " +
-                               $"profession = @Profession ");
-                builder.Append($"WHERE name = \'{key.First}\' AND country = \'{key.Second}\'");
+                               $"profession = @Profession, " +
+                               $"nameTrainingProgram = @NameTrainingProgram, " +
+                               $"coachTrainingProgram = @CoachTrainingProgram ");
+                builder.Append($"WHERE name = @Key1 AND country = @Key2");
                 db.Execute(builder.ToString(), new
                 {
-                    Name = @object.Name, 
-                    Country = @object.Country,
-                    Education = @object.Education, 
-                    Sex = @object.Sex, 
-                    Profession = @object.Profession
+                    @object.Name, 
+                    @object.Country,
+                    @object.Education, 
+                    @object.Sex, 
+                    @object.Profession,
+                    NameTrainingProgram = @object.TrainingProgram.Name,
+                    CoachTrainingProgram = @object.TrainingProgram.Coach,
+                    Key1 = key.First, Key2 = key.Second
                 });
             }
         }

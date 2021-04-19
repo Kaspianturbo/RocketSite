@@ -22,14 +22,14 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = $"INSERT INTO Equipment (name, producer, cost, compatibleRocketName, compatibleRocketVersion) " +
-                    "VALUES(@Name, @Producer, @Cost, @CompatibleRocketName, @CompatibleRocketVersion)";
+                var sqlQuery = $"INSERT INTO Equipment (name, producer, cost, rocketName, rocketVersion) " +
+                    "VALUES(@Name, @Producer, @Cost, @RocketName, @RocketVersion)";
                 db.Execute(sqlQuery,
                     new
                     {
-                        Name = @object.Name, Producer = @object.Producer, Cost = @object.Cost,
-                        CompatibleRocketName = @object.CompatibleRocket.Name,
-                        CompatibleRocketVersion = @object.CompatibleRocket.Version
+                        @object.Name, @object.Producer, @object.Cost,
+                        RocketName = @object.Rocket.Name,
+                        RocketVersion = @object.Rocket.Version
                     });
             }
         }
@@ -47,7 +47,17 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Equipment>("SELECT * FROM Equipment WHERE name = @Name AND producer = @Producer", @object).FirstOrDefault();
+                var itemList = db.Query("SELECT * FROM Equipment WHERE name = @Name AND producer = @Producer", @object);
+
+                return (from item in itemList
+                        let rocket = new Rocket { Name = item.rocketName, Version = item.rocketVersion }
+                        select new Equipment
+                        {
+                            Name = item.name,
+                            Producer = item.producer,
+                            Cost = item.cost,
+                            Rocket = rocket
+                        }).FirstOrDefault();
             }
         }
 
@@ -55,7 +65,17 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Equipment>("SELECT * FROM Equipment").ToList();
+                var itemList = db.Query("SELECT * FROM Equipment");
+
+                return (from item in itemList
+                        let rocket = new Rocket { Name = item.rocketName, Version = item.rocketVersion }
+                        select new Equipment
+                        {
+                            Name = item.name,
+                            Producer = item.producer,
+                            Cost = item.cost,
+                            Rocket = rocket
+                        }).ToList();
             }
         }
 
@@ -67,16 +87,15 @@ namespace RocketSite.Common.Repositories
                     $"name = @Name, " +
                     $"producer = @Producer, " +
                     $"cost = @Cost, " +
-                    $"compatibleRocketName = @CompatibleRocketName, " +
-                    $"compatibleRocketVersion = @CompatibleRocketVersion " +
-                    $"WHERE name = \'{key.First}\' AND producer = \'{key.Second}\'";
+                    $"rocketName = @RocketName, " +
+                    $"rocketVersion = @RocketVersion " +
+                    $"WHERE name = @Key1 AND producer = @Key2";
                 db.Execute(sqlQuery, new
                 {
-                    Name = @object.Name,
-                    Producer = @object.Producer,
-                    Cost = @object.Cost,
-                    CompatibleRocketName = @object.CompatibleRocket.Name,
-                    CompatibleRocketVersion = @object.CompatibleRocket.Version
+                    @object.Name, @object.Producer, @object.Cost,
+                    RocketName = @object.Rocket.Name,
+                    RocketVersion = @object.Rocket.Version,
+                    Key1 = key.First, Key2 = key.Second
                 });
             }
         }

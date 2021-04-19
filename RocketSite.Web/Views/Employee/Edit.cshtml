@@ -1,5 +1,6 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model RocketSite.Common.Models.Employee
+@using RocketSite.Common.Options
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -26,11 +27,22 @@
             </div>
             <div class="form-group">
                 <label asp-for="Sex"></label>
-                <input asp-for="Sex" class="form-control" />
+                <select asp-for="Sex" class="form-control  form-control-sm"
+                        asp-items="Html.GetEnumSelectList<SexOption>()">
+                    <option>Select type ...</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Profession"></label>
                 <input asp-for="Profession" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TrainingProgram.Name"></label>
+                <input asp-for="TrainingProgram.Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TrainingProgram.Coach"></label>
+                <input asp-for="TrainingProgram.Coach" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-outline-secondary" />

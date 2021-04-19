@@ -9,31 +9,39 @@
         <a asp-controller="Customer" asp-action="Create">Create</a>
     </p>
     <table class="table">
-        <tr>
-            <th>Name</th>
-            <th>Country</th>
-            <th>TotalWorth</th>
-            <th>SpaceMissionName</th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-    <tr>
-        <td>@item.Name</td>
-        <td>
-            @item.Country
-        </td>
-        <td>
-            @item.TotalWorth
-        </td>
-        <td>
-            @item.SpaceMissionName
-        </td>
-        <td>
-            <a asp-controller="Customer" asp-action="Edit" asp-route-name="@item.Name" asp-route-country="@item.Country">Edit</a> |
-            <a asp-controller="Customer" asp-action="Delete" asp-route-name="@item.Name" asp-route-country="@item.Country">Delete</a>
-        </td>
-    </tr>
-}
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalWorth)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalWorth)
+                    </td>
+                    <td>
+                    <td>
+                        <a asp-controller="Customer" asp-action="Edit" asp-route-name="@item.Name" asp-route-country="@item.Country">Edit</a> |
+                        <a asp-controller="Customer" asp-action="Delete" asp-route-name="@item.Name" asp-route-country="@item.Country">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>

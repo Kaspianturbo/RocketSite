@@ -23,10 +23,10 @@
                     @Html.DisplayNameFor(model => model.Cost)
                 </th>
                 <th>
-                    CompatibleRocketName
+                    @Html.DisplayNameFor(model => model.Rocket.Name)
                 </th>
                 <th>
-                    CompatibleRocketVersion
+                    @Html.DisplayNameFor(model => model.Rocket.Version)
                 </th>
             </tr>
         </thead>
@@ -44,10 +44,10 @@
                         @Html.DisplayFor(modelItem => item.Cost)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CompatibleRocket.Name)
+                        @Html.DisplayFor(modelItem => item.Rocket.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CompatibleRocket.Version)
+                        @Html.DisplayFor(modelItem => item.Rocket.Version)
                     </td>
                     <td>
                         <a asp-controller="Equipment" asp-action="Edit" asp-route-name="@item.Name" asp-route-producer="@item.Producer">Edit</a> |

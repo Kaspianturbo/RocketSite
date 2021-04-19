@@ -31,46 +31,52 @@
                     @Html.DisplayNameFor(model => model.EndDate)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Rocket.Name)
+                    Rocket @Html.DisplayNameFor(model => model.Rocket.Name)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Rocket.Version)
+                    Rocket @Html.DisplayNameFor(model => model.Rocket.Version)
+                </th>
+                <th>
+                    Cosmodrome @Html.DisplayNameFor(model => model.Cosmodrome.Name)
                 </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Cost)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Altitude)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StartDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EndDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Rocket.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Rocket.Version)
-                    </td>
-                    <td>
-                        <a asp-controller="SpaceMission" asp-action="Edit" asp-route-name="@item.Name">Edit</a> |
-                        <a asp-controller="SpaceMission" asp-action="Delete" asp-route-name="@item.Name">Delete</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Altitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rocket.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rocket.Version)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cosmodrome.Name)
+                </td>
+                <td>
+                    <a asp-controller="SpaceMission" asp-action="Edit" asp-route-name="@item.Name">Edit</a> |
+                    <a asp-controller="SpaceMission" asp-action="Delete" asp-route-name="@item.Name">Delete</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

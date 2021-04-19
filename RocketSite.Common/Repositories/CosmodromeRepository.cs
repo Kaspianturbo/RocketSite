@@ -48,7 +48,16 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Cosmodrome>("SELECT * FROM Cosmodrome WHERE name = @Name", @object).FirstOrDefault();
+                var itemList = db.Query("SELECT * FROM Cosmodrome WHERE name = @Name", @object);
+
+                return (from item in itemList
+                        let location = new Location { Latitude = item.latitude, Longitude = item.longitude }
+                        select new Cosmodrome
+                        {
+                            Name = item.name,
+                            Timezone = item.timezone,
+                            Location = location
+                        }).FirstOrDefault();
             }
         }
 
@@ -56,10 +65,19 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Cosmodrome>("SELECT * FROM Cosmodrome").ToList();
+                var itemList = db.Query("SELECT * FROM Cosmodrome");
+
+                return (from item in itemList
+                        let location = new Location { Latitude = item.latitude, Longitude = item.longitude }
+                        select new Cosmodrome
+                        {
+                            Name = item.name,
+                            Timezone = item.timezone,
+                            Location = location
+                        }).ToList();
             }
         }
-
+ 
         public void Update(Cosmodrome @object, Key key)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
@@ -69,13 +87,14 @@ namespace RocketSite.Common.Repositories
                     $"timezone = @Timezone, " +
                     $"latitude = @Latitude, " +
                     $"longitude = @Longitude " +
-                    $"WHERE name = \'{key.First}\'";
+                    $"WHERE name = @Key1";
                 db.Execute(sqlQuery, new
                 {
                     Name = @object.Name,
                     Timezone = @object.Timezone,
                     Latitude = @object.Location.Latitude,
-                    Longitude = @object.Location.Longitude
+                    Longitude = @object.Location.Longitude,
+                    Key1 = key.First
                 });
             }
         }

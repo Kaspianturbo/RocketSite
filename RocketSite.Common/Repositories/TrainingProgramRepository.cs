@@ -45,6 +45,11 @@ namespace RocketSite.Common.Repositories
             }
         }
 
+        public List<string> GetKeys()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<TrainingProgram> GetObjects()
         {
             using (IDbConnection db = new SqlConnection(_connectionString))

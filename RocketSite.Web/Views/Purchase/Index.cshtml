@@ -54,7 +54,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.SpaceMission.Name)
                     </td>
-                    <td>
+                    @*<td>
                         @Html.DisplayFor(modelItem => item.Employee.Name)
                     </td>
                     <td>
@@ -63,7 +63,7 @@
                     <td>
                         <a asp-controller="Purchase" asp-action="Edit" asp-route-name="@item.Name" asp-route-employeeName="@item.Employee.Name">Edit</a> |
                         <a asp-controller="Purchase" asp-action="Delete" asp-route-name="@item.Name" asp-route-employeeName="@item.Employee.Name">Delete</a>
-                    </td>
+                    </td>*@
                 </tr>
             }
         </tbody>

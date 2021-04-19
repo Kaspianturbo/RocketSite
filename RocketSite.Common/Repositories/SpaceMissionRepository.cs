@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using RocketSite.Common.Interfaces;
 using RocketSite.Common.Models;
+using RocketSite.Common.Options;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,19 +23,20 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = $"INSERT INTO SpaceMission (name, statys, cost, aititude, startDate, endDate, rocketName, rocketVersion) " +
-                    "VALUES(@Name, @Statys, @Cost, @Aititude, @StartDate, @EndDate, @RocketName, @RocketVersion)";
+                var sqlQuery = $"INSERT INTO SpaceMission (name, status, cost, altitude, startDate, endDate, rocketName, rocketVersion, cosmodromeName) " +
+                    "VALUES(@Name, @Status, @Cost, @Altitude, @StartDate, @EndDate, @RocketName, @RocketVersion, @CosmodromeName)";
                 db.Execute(sqlQuery,
                     new
                     {
-                        Name = @object.Name,
-                        Statys = @object.Status,
-                        Cost = @object.Cost,
-                        Aititude = @object.Altitude,
-                        StartDate = @object.StartDate,
-                        EndDate = @object.EndDate,
+                        @object.Name,
+                        @object.Status,
+                        @object.Cost,
+                        @object.Altitude,
+                        @object.StartDate,
+                        @object.EndDate,
                         RocketName = @object.Rocket.Name,
-                        RocketVersion = @object.Rocket.Version
+                        RocketVersion = @object.Rocket.Version,
+                        CosmodromeName = @object.Cosmodrome.Name
                     });
             }
         }
@@ -52,7 +54,22 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<SpaceMission>("SELECT * FROM SpaceMission WHERE name = @Name", @object).FirstOrDefault();
+                var itemList = db.Query("SELECT * FROM SpaceMission WHERE name = @Name", @object);
+
+                return (from item in itemList
+                        let rocket = new Rocket { Name = item.rocketName, Version = item.rocketVersion }
+                        let cosmodrome = new Cosmodrome { Name = item.cosmodromeName }
+                        select new SpaceMission
+                        {
+                            Name = item.name,
+                            Status = Enum.Parse<StatusOption>(item.status),
+                            Cost = item.cost,
+                            Altitude = item.altitude,
+                            StartDate = item.startDate,
+                            EndDate = item.endDate,
+                            Rocket = rocket,
+                            Cosmodrome = cosmodrome
+                        }).FirstOrDefault();
             }
         }
 
@@ -60,15 +77,22 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<SpaceMission, Rocket, SpaceMission>(
-                    "SELECT * FROM SpaceMission as s LEFT JOIN Rocket as r ON s.rocketName = r.name AND s.rocketVersion = r.version",
-                    (s, r) =>
-                    {
-                        SpaceMission mission = s;
-                        s.Rocket = r;
-                        s.Resources = new List<Resources>();
-                        return mission;
-                    }, splitOn: "rocketName").ToList(); ;
+                var itemList = db.Query("SELECT * FROM SpaceMission");
+
+                return (from item in itemList
+                        let rocket = new Rocket { Name = item.rocketName, Version = item.rocketVersion }
+                        let cosmodrome = new Cosmodrome { Name = item.cosmodromeName }
+                        select new SpaceMission
+                        {
+                            Name = item.name,
+                            Status = Enum.Parse<StatusOption>(item.status),
+                            Cost = item.cost,
+                            Altitude = item.altitude,
+                            StartDate = item.startDate,
+                            EndDate = item.endDate,
+                            Rocket = rocket,
+                            Cosmodrome = cosmodrome
+                        }).ToList();
             }
         }
 
@@ -76,23 +100,29 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                StringBuilder builder = new StringBuilder();
+                var builder = new StringBuilder();
                 builder.Append($"UPDATE SpaceMission SET " +
                                $"name = @Name, " +
-                               $"statys = @Statys, " +
+                               $"status = @Status, " +
                                $"cost = @Cost, " +
                                $"altitude = @Altitude, " +
                                $"startDate = @StartDate, " +
-                               $"endDate = @EndDate ");
+                               $"endDate = @EndDate, " +
+                               $"rocketName = @RocketName, " +
+                               $"rocketVersion = @RocketVersion, " +
+                               $"cosmodromeName = @CosmodromeName ");
                 builder.Append($"WHERE name = \'{key.First}\'");
                 db.Execute(builder.ToString(), new
                 {
-                    Name = @object.Name,
-                    Statys = @object.Status,
-                    Cost = @object.Cost,
-                    Altitude = @object.Altitude,
-                    StartDate = @object.StartDate,
-                    EndDate = @object.EndDate
+                    @object.Name,
+                    @object.Status,
+                    @object.Cost,
+                    @object.Altitude,
+                    @object.StartDate,
+                    @object.EndDate,
+                    RocketName = @object.Rocket.Name,
+                    RocketVersion = @object.Rocket.Version,
+                    CosmodromeName = @object.Cosmodrome.Name
                 });
             }
         }

@@ -32,8 +32,8 @@ namespace RocketSite.Common.Repositories
                         ResourceType = @object.Resources.Type,
                         Cost = @object.Cost,
                         SpaceMissionName = @object.SpaceMission.Name,
-                        EmployeeName = @object.Employee.Name,
-                        EmployeeCountry = @object.Employee.Country
+                        //EmployeeName = @object.Employee.Name,
+                        //EmployeeCountry = @object.Employee.Country
                     });
             }
         }
@@ -43,7 +43,7 @@ namespace RocketSite.Common.Repositories
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 var sqlQuery = "DELETE FROM Purchase WHERE name = @Name AND employeeName = @EmployeeName";
-                db.Execute(sqlQuery, new { Name = @object.Name, EmployeeName = @object.Employee.Name});
+                db.Execute(sqlQuery, new { Name = @object.Name/*, EmployeeName = @object.Employee.Name*/});
             }
         }
 
@@ -53,9 +53,14 @@ namespace RocketSite.Common.Repositories
             {
                 return db.Query<Purchase>(
                     "SELECT * FROM Purchase WHERE name = @Name AND employeeName = @EmployeeName", 
-                    new { Name = @object.Name, EmployeeName = @object.Employee.Name }
+                    new { Name = @object.Name, /*EmployeeName = @object.Employee.Name */}
                     ).FirstOrDefault();
             }
+        }
+
+        public List<string> GetKeys()
+        {
+            throw new NotImplementedException();
         }
 
         public List<Purchase> GetObjects()
@@ -86,8 +91,8 @@ namespace RocketSite.Common.Repositories
                     ResourceType = @object.Resources.Type,
                     Cost = @object.Cost,
                     SpaceMissionName = @object.SpaceMission.Name,
-                    EmployeeName = @object.Employee.Name,
-                    EmployeeCountry = @object.Employee.Country
+                    //EmployeeName = @object.Employee.Name,
+                    //EmployeeCountry = @object.Employee.Country
                 });
             }
         }

@@ -1,5 +1,6 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model RocketSite.Common.Models.SpaceMission
+@using RocketSite.Common.Options
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -17,7 +18,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="Status"></label>
-                <input asp-for="Status" class="form-control" />
+                <select asp-for="Status" class="form-control  form-control-sm"
+                        asp-items="Html.GetEnumSelectList<StatusOption>()">
+                    <option>Select status ...</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Cost"></label>
@@ -34,6 +38,18 @@
             <div class="form-group">
                 <label asp-for="EndDate"></label>
                 <input asp-for="EndDate" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Rocket.Name"></label>
+                <input asp-for="Rocket.Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Rocket.Version"></label>
+                <input asp-for="Rocket.Version" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Cosmodrome.Name"></label>
+                <input asp-for="Cosmodrome.Name" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-outline-secondary" />

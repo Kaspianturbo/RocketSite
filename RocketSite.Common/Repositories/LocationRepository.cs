@@ -22,7 +22,7 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = $"INSERT INTO Location (latitude, longitude, Country, City) " +
+                var sqlQuery = $"INSERT INTO Location (latitude, longitude, country, city) " +
                     "VALUES(@Latitude, @Longitude, @Country, @City)";
                 db.Execute(sqlQuery, @object);
             }
@@ -41,7 +41,16 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Location>("SELECT * FROM Location WHERE latitude = @Latitude AND longitude = @Longitude", @object).FirstOrDefault();
+                var itemList = db.Query("SELECT * FROM Location WHERE latitude = @Latitude AND longitude = @Longitude", @object);
+
+                return (from item in itemList
+                        select new Location
+                        {
+                            Latitude = item.latitude,
+                            Longitude = item.longitude,
+                            Country = item.country,
+                            City = item.city
+                        }).FirstOrDefault();
             }
         }
 
@@ -49,7 +58,16 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Location>("SELECT * FROM Location").ToList();
+                var itemList = db.Query("SELECT * FROM Location");
+
+                return (from item in itemList
+                        select new Location
+                        {
+                            Latitude = item.latitude,
+                            Longitude = item.longitude,
+                            Country = item.country,
+                            City = item.city
+                        }).ToList();
             }
         }
 
@@ -60,10 +78,16 @@ namespace RocketSite.Common.Repositories
                 var sqlQuery = $"UPDATE Location SET " +
                     $"latitude = @Latitude, " +
                     $"longitude = @Longitude, " +
-                    $"Country = @Country, " +
-                    $"City = @City " +
+                    $"country = @Country, " +
+                    $"city = @City " +
                     $"WHERE latitude = {key.First} AND longitude = {key.Second}";
-                db.Execute(sqlQuery, @object);
+                db.Execute(sqlQuery, new
+                {
+                    @object.Latitude,
+                    @object.Longitude,
+                    @object.Country,
+                    @object.City
+                });
             }
         }
     }

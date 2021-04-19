@@ -23,7 +23,7 @@ namespace RocketSite.Web.Controllers
 
         public ActionResult Details(string name,  string employeeName)
         {
-            Purchase user = _repository.Get(new Purchase { Name = name, Employee = new Employee{Name = employeeName }});
+            Purchase user = _repository.Get(new Purchase { Name = name, /*Employee = new Employee{Name = employeeName }*/});
             if (user != null)
                 return View(user);
             return NotFound();
@@ -43,7 +43,7 @@ namespace RocketSite.Web.Controllers
 
         public ActionResult Edit(string name, string employeeName)
         {
-            Purchase user = _repository.Get(new Purchase { Name = name, Employee = new Employee { Name = employeeName }});
+            Purchase user = _repository.Get(new Purchase { Name = name, /*Employee = new Employee { Name = employeeName }*/});
             if (user != null)
                 return View(user);
             return NotFound();
@@ -58,7 +58,7 @@ namespace RocketSite.Web.Controllers
 
         public ActionResult Delete(string name, string employeeName)
         {
-            _repository.Delete(new Purchase { Name = name, Employee = new Employee { Name = employeeName } });
+            _repository.Delete(new Purchase { Name = name, /*Employee = new Employee { Name = employeeName }*/ });
             return RedirectToAction("Index");
         }
     }

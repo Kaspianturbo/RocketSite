@@ -12,5 +12,6 @@ namespace RocketSite.Common.Models
         public ResourceOption Type { get; set; }
         public int Emaunt { get; set; }
         public int Cost { get; set; }
+        public List<SpaceMission> SpaceMissions { get; set; }
     }
 }

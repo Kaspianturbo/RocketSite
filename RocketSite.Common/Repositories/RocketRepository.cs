@@ -41,7 +41,22 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Rocket>("SELECT * FROM Rocket WHERE name = @Name AND version = @Version", @object).FirstOrDefault();
+                var itemList = db.Query("SELECT * FROM Rocket WHERE name = @Name AND version = @Version", @object);
+
+                return (from item in itemList
+                        select new Rocket
+                        {
+                            Name = item.name,
+                            Version = item.version,
+                            Weight = item.weight,
+                            Height = item.height,
+                            Diameter = item.diameter,
+                            Cost = item.cost,
+                            Stages = item.stages,
+                            MassToLEO = item.massToLEO,
+                            MassToGTO = item.massToGTO,
+                            EngineType = item.engineType
+                        }).FirstOrDefault();
             }
         }
 
@@ -49,7 +64,22 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Rocket>("SELECT * FROM Rocket").ToList();
+                var itemList = db.Query("SELECT * FROM Rocket");
+
+                return (from item in itemList
+                        select new Rocket
+                        {
+                            Name = item.name,
+                            Version = item.version,
+                            Weight = item.weight,
+                            Height = item.height,
+                            Diameter = item.diameter,
+                            Cost = item.cost,
+                            Stages = item.stages,
+                            MassToLEO = item.massToLEO,
+                            MassToGTO = item.massToGTO,
+                            EngineType = item.engineType
+                        }).ToList();
             }
         }
 

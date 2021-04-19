@@ -48,18 +48,20 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Cargo, Customer, SpaceMission, Cargo>(
-                    "SELECT * FROM Cargo as ca " +
-                    "WHERE ca.name = @Name AND ca.type = @Type " +
-                    "LEFT JOIN Customer as cu ON ca.customerName = cu.name " +
-                    "AND ca.customerCountry = cu.country " +
-                    "LEFT JOIN SpaceMission as sm ON ca.spaceMissionName = sm.name",
-                    (ca, cu, sm) =>
-                    {
-                        ca.Customer = cu;
-                        ca.SpaceMission = sm;
-                        return ca;
-                    }, @object).FirstOrDefault();
+                var itemList = db.Query("SELECT * FROM Cargo WHERE name = @Name AND type = @Type", @object);
+                
+                return (from item in itemList
+                        let spaceMission = new SpaceMission { Name = item.spaceMissionName }
+                        let customer = new Customer { Name = item.customerName, Country = item.customerCountry }
+                        select new Cargo
+                        {
+                            Name = item.name,
+                            Type = Enum.Parse<CargoOption>(item.type),
+                            Weight = item.weight,
+                            Emaunt = item.emaunt,
+                            SpaceMission = spaceMission,
+                            Customer = customer
+                        }).FirstOrDefault();
             }
         }
 
@@ -68,21 +70,20 @@ namespace RocketSite.Common.Repositories
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 var itemList =  db.Query(
-                    "SELECT name, type, weight, emaunt, customerName, customerCountry, spaceMissionName " +
-                    "FROM Cargo");
+                    "SELECT * FROM Cargo");
 
                 return (from item in itemList
-                    let customer = new Customer {Name = item.customerName, Country = item.customerCountry}
-                    let mission = new SpaceMission {Name = item.spaceMissionName}
-                    select new Cargo
-                    {
-                        Name = item.name,
-                        Type = Enum.Parse<CargoOption>(item.type),
-                        Weight = item.weight,
-                        Emaunt = item.emaunt,
-                        Customer = customer,
-                        SpaceMission = mission
-                    }).ToList();
+                        let spaceMission = new SpaceMission { Name = item.spaceMissionName }
+                        let customer = new Customer { Name = item.customerName, Country = item.customerCountry }
+                        select new Cargo
+                        {
+                            Name = item.name,
+                            Type = Enum.Parse<CargoOption>(item.type),
+                            Weight = item.weight,
+                            Emaunt = item.emaunt,
+                            SpaceMission = spaceMission,
+                            Customer = customer
+                        }).ToList();
             }
         }
 
@@ -98,13 +99,14 @@ namespace RocketSite.Common.Repositories
                     $"customerName = @CustomerName, " +
                     $"customerCountry = @CustomerCountry, " +
                     $"spaceMissionName = @SpaceMissionName " +
-                    $"WHERE name = \'{key.First}\' AND type = \'{key.Second}\'";
+                    $"WHERE name = @Key1 AND type = @Key2";
                   db.Execute(sqlQuery,
                       new
                       {
                           @object.Name, @object.Type, @object.Weight, @object.Emaunt,
                           CustomerName = @object.Customer.Name, CustomerCountry = @object.Customer.Country,
-                          SpaceMissionName = @object.SpaceMission.Name
+                          SpaceMissionName = @object.SpaceMission.Name,
+                          Key1 = key.First, Key2 = key.Second
                       });
             }
         }

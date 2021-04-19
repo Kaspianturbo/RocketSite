@@ -22,8 +22,8 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = $"INSERT INTO Customer (name, country, totalWortht, spaceMissionName) " +
-                    "VALUES(@Name, @Country, @TotalWortht, @SpaceMissionName)";
+                var sqlQuery = $"INSERT INTO Customer (name, country, totalWorth) " +
+                    "VALUES(@Name, @Country, @TotalWorth)";
                 db.Execute(sqlQuery, @object);
             }
         }
@@ -41,7 +41,15 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Customer>("SELECT * FROM Customer WHERE name = @Name AND country = @Country", @object).FirstOrDefault();
+                var itemList = db.Query("SELECT * FROM Customer WHERE name = @Name AND country = @Country", @object);
+
+                return (from item in itemList
+                        select new Customer
+                        {
+                            Name = item.name,
+                            Country = item.country,
+                            TotalWorth = item.totalWorth
+                        }).FirstOrDefault();
             }
         }
 
@@ -49,7 +57,15 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<Customer>("SELECT * FROM Customer").ToList();
+                var itemList = db.Query("SELECT * FROM Customer");
+
+                return (from item in itemList
+                        select new Customer
+                        {
+                            Name = item.name,
+                            Country = item.country,
+                            TotalWorth = item.totalWorth
+                        }).ToList();
             }
         }
 
@@ -60,10 +76,9 @@ namespace RocketSite.Common.Repositories
                 var sqlQuery = $"UPDATE Customer SET " +
                     $"name = @Name, " +
                     $"country = @Country, " +
-                    $"totalWorth = @TotalWorth, " +
-                    $"spaceMissionName = @SpaceMissionName " +
-                    $"WHERE name = \'{key.First}\' AND country = \'{key.Second}\'";
-                db.Execute(sqlQuery, @object);
+                    $"totalWorth = @TotalWorth " +
+                    $"WHERE name = @Key1 AND country = @Key2";
+                db.Execute(sqlQuery, new { @object.Name, @object.Country, TotalWorth = @object.TotalWorth, Key1 = key.First, Key2 = key.Second});
             }
         }
     }
