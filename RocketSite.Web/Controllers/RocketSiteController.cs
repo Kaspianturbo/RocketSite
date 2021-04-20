@@ -22,9 +22,9 @@ namespace RocketSite.Web.Controllers
             return View();
         }
 
-        public ActionResult View1(string param1, string param2, string param3, string param4)
+        public ActionResult View1(string name, string type, string startDate, string endDate)
         {
-            Response1 res = _repository.Get1(param1, param2, param3, param4);
+            var res = _repository.Get1(name, type, startDate, endDate);
             return View(res);
         }
     }

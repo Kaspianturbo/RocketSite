@@ -26,7 +26,7 @@ namespace RocketSite.Common.Models
         public int MassToLEO { get; set; }
         [Display(Name = "Mass to GTO")]
         public int MassToGTO { get; set; }
-        [Display(Name = "Engine Type")]
+        [Display(Name = "Engine type")]
         public string EngineType { get; set; }
         public List<SpaceMission> SpaceMissions { get; set; }
         public List<Equipment> Equipment { get; set; }

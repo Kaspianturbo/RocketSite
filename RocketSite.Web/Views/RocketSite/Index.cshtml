@@ -1,4 +1,5 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using RocketSite.Common.Options
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -20,20 +21,23 @@
                     <form asp-action="View1" asp-controller="RocketSite">
                         <div>
                             <div class="form-group">
-                                <label>CustomerName</label>
-                                <input type="text" name="param1" class="form-control form-control-sm" />
+                                <label>Cargo name</label>
+                                <input type="text" name="name" class="form-control form-control-sm" />
                             </div>
                             <div class="form-group">
-                                <label>CustomerCountry</label>
-                                <input name="param2" class="form-control  form-control-sm" />
+                                <label>Cargo type</label>
+                                <select name="type" class="form-control  form-control-sm"
+                                        asp-items="Html.GetEnumSelectList<CargoOption>()">
+                                    <option>Select type ...</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>StartDate</label>
-                                <input name="param3" class="form-control  form-control-sm" />
+                                <input name="startDate" class="form-control  form-control-sm" />
                             </div>
                             <div class="form-group">
                                 <label>EndDate</label>
-                                <input name="param4" class="form-control  form-control-sm" />
+                                <input name="endDate" class="form-control  form-control-sm" />
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="Save" class="btn btn-outline-secondary" />
