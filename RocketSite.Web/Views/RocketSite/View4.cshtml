@@ -1,0 +1,101 @@
+﻿@model IEnumerable<RocketSite.Common.Models.Employee>
+
+@{
+    ViewData["Title"] = "View4";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>Response 4</h4>
+    <hr />
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="card col-6">
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Name)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Country)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Country)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Education)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Education)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Sex)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Sex)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Profession)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Profession)
+                            </dd>
+                        </dl>
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            Training program
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="collapse collapsed" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <dl class="row">
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.TrainingProgram.Name)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.TrainingProgram.Name)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.TrainingProgram.Area)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.TrainingProgram.Area)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.TrainingProgram.Coach)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.TrainingProgram.Coach)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.TrainingProgram.Cost)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.TrainingProgram.Cost)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.TrainingProgram.Duration)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.TrainingProgram.Duration)
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RocketSite.Common.Responses;
 
 namespace RocketSite.Web.Controllers
 {
@@ -25,6 +24,52 @@ namespace RocketSite.Web.Controllers
         public ActionResult View1(string name, string type, string startDate, string endDate)
         {
             var res = _repository.Get1(name, type, startDate, endDate);
+            return View(res);
+        }
+
+        public ActionResult View2(int mass, string eqName, string eqProducer)
+        {
+            var res = _repository.Get2(mass, eqName, eqProducer);
+            return View(res);
+        }
+        public ActionResult View3(string name, string status)
+        {
+            var res = _repository.Get3(name, status);
+            return View(res);
+        }
+        public ActionResult View4(string name, string coach, string area)
+        {
+            var res = _repository.Get4(name, coach, area);
+            return View(res);
+        }
+        public ActionResult View5(string area, string duration)
+        {
+            var res = _repository.Get5(area, duration);
+            return View(res);
+        }
+        public ActionResult View6(string name, string status)
+        {
+            var res = _repository.Get6(name, status);
+            return View(res);
+        }
+        public ActionResult View7(int mass, string eqName, string eqProducer)
+        {
+            var res = _repository.Get2(mass, eqName, eqProducer);
+            return View(res);
+        }
+        public ActionResult View8(int mass, string eqName, string eqProducer)
+        {
+            var res = _repository.Get2(mass, eqName, eqProducer);
+            return View(res);
+        }
+        public ActionResult View9(int mass, string eqName, string eqProducer)
+        {
+            var res = _repository.Get2(mass, eqName, eqProducer);
+            return View(res);
+        }
+        public ActionResult View10(int mass, string eqName, string eqProducer)
+        {
+            var res = _repository.Get2(mass, eqName, eqProducer);
             return View(res);
         }
     }

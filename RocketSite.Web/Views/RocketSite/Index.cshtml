@@ -57,7 +57,25 @@
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    <form asp-action="View2" asp-controller="RocketSite">
+                        <div>
+                            <div class="form-group">
+                                <label>Mass</label>
+                                <input name="mass" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <label>Equipment name</label>
+                                <input name="eqName" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <label>Equipment producer</label>
+                                <input name="eqProducer" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-outline-secondary" />
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -71,7 +89,115 @@
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    <form asp-action="View3" asp-controller="RocketSite">
+                        <div>
+                            <div class="form-group">
+                                <label>Mission name</label>
+                                <input name="name" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <label>Mission status</label>
+                                <select name="status" class="form-control  form-control-sm"
+                                        asp-items="Html.GetEnumSelectList<StatusOption>()">
+                                    <option>Select type ...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-outline-secondary" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingFour">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Request 4
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                <div class="card-body">
+                    <form asp-action="View4" asp-controller="RocketSite">
+                        <div>
+                            <div class="form-group">
+                                <label>Training program name</label>
+                                <input name="name" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <label>Coach</label>
+                                <input name="coach" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <label>Area</label>
+                                <input name="area" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-outline-secondary" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingFive">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        Request 5
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                <div class="card-body">
+                    <form asp-action="View5" asp-controller="RocketSite">
+                        <div>
+                            <div class="form-group">
+                                <label>Training program area</label>
+                                <input name="area" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <label>Duration</label>
+                                <input name="duration" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-outline-secondary" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingSix">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                        Request 6
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                <div class="card-body">
+                    <form asp-action="View6" asp-controller="RocketSite">
+                        <div>
+                            <div class="form-group">
+                                <label>Mission name</label>
+                                <input name="name" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <label>Mission status</label>
+                                <select name="status" class="form-control  form-control-sm"
+                                        asp-items="Html.GetEnumSelectList<StatusOption>()">
+                                    <option>Select type ...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-outline-secondary" />
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

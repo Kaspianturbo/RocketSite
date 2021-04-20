@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RocketSite.Common.Responses;
+using RocketSite.Common.Options;
 
 namespace RocketSite.Common.Interfaces
 {
     public interface IRocketSiteRepository
     {
         List<SpaceMission> Get1(string param1, string param2, string param3, string param4);
-        List<Response2> Get2(string param1, string param2);
-        List<Response3> Get3(string param1, string param2);
-        List<Response4> Get4(string param1, string param2);
+        List<Rocket> Get2(int param1, string param2, string param3);
+        List<Cosmodrome> Get3(string param1, string param2);
+        List<Employee> Get4(string param1, string param2, string param3);
+        List<TrainingProgram> Get5(string param1, string param2);
+        List<Cargo> Get6(string param1, string param2);
     }
 }

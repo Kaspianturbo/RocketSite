@@ -1,0 +1,54 @@
+﻿@model IEnumerable<RocketSite.Common.Models.TrainingProgram>
+
+@{
+    ViewData["Title"] = "View5";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>Response 5</h4>
+    <hr />
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="card col-4">
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Name)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Area)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Area)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Coach)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Coach)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Cost)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Cost)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Duration)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Duration)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

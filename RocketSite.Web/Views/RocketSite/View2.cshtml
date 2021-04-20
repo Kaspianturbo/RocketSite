@@ -1,0 +1,119 @@
+﻿@model IEnumerable<RocketSite.Common.Models.Rocket>
+
+@{
+    ViewData["Title"] = "View2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>Response 2</h4>
+    <hr />
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="card col-6">
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Name)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Version)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Version)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Weight)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Weight)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Height)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Height)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Diameter)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Diameter)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Cost)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Cost)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Stages)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Stages)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.MassToLEO)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.MassToLEO)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.MassToGTO)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.MassToGTO)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.EngineType)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.EngineType)
+                            </dd>
+                        </dl>
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            Equipment
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="collapse collapsed" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <dl class="row">
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Equipment[0].Name)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Equipment[0].Name)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Equipment[0].Producer)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Equipment[0].Producer)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Equipment[0].Cost)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Equipment[0].Cost)
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
