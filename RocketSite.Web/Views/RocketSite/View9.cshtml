@@ -1,0 +1,95 @@
+﻿@model IEnumerable<RocketSite.Common.Models.Customer>
+
+@{
+    ViewData["Title"] = "View9";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>Response 9</h4>
+    <hr />
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="card col-6">
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Name)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Country)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Country)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.TotalWorth)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.TotalWorth)
+                            </dd>
+                        </dl>
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            SpaceMission
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="collapse collapsed" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <dl class="row">
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Cargos[0].SpaceMission.Name)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Cargos[0].SpaceMission.Name)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Cargos[0].SpaceMission.Status)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Cargos[0].SpaceMission.Status)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Cargos[0].SpaceMission.Cost)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Cargos[0].SpaceMission.Cost)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Cargos[0].SpaceMission.Altitude)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Cargos[0].SpaceMission.Altitude)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Cargos[0].SpaceMission.StartDate)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Cargos[0].SpaceMission.StartDate)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Cargos[0].SpaceMission.EndDate)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Cargos[0].SpaceMission.EndDate)
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

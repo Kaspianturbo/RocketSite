@@ -16,5 +16,9 @@ namespace RocketSite.Common.Interfaces
         List<Employee> Get4(string param1, string param2, string param3);
         List<TrainingProgram> Get5(string param1, string param2);
         List<Cargo> Get6(string param1, string param2);
+        List<Equipment> Get7(string param1, string param2);
+        List<Resources> Get8(string param1, string param2, string param3);
+        List<Customer> Get9(string param1, string param2);
+        List<Purchase> Get10(string param1);
     }
 }

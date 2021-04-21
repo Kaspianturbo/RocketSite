@@ -1,0 +1,119 @@
+﻿@model IEnumerable<RocketSite.Common.Models.Equipment>
+
+@{
+    ViewData["Title"] = "View7";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>Response 7</h4>
+    <hr />
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="card col-6">
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Name)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Producer)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Producer)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Cost)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Cost)
+                            </dd>
+                        </dl>
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            Rocket
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseOne" class="collapse collapsed" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <dl class="row">
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Rocket.Name)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Rocket.Name)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Rocket.Version)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Rocket.Version)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Rocket.Weight)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Rocket.Weight)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Rocket.Height)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Rocket.Height)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Rocket.Diameter)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Rocket.Diameter)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Rocket.Cost)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Rocket.Cost)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Rocket.Stages)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Rocket.Stages)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Rocket.MassToLEO)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Rocket.MassToLEO)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Rocket.MassToGTO)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Rocket.MassToGTO)
+                                            </dd>
+                                            <dt class="col-sm-4">
+                                                @Html.DisplayNameFor(item => item.Rocket.EngineType)
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                @Html.DisplayFor(modelItem => item.Rocket.EngineType)
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

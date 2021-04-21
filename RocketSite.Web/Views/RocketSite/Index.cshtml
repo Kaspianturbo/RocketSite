@@ -201,5 +201,123 @@
                 </div>
             </div>
         </div>
+        <div class="card">
+            <div class="card-header" id="heading7">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                        Request 7
+                    </button>
+                </h5>
+            </div>
+            <div id="collapse7" class="collapse" aria-labelledby="heading7" data-parent="#accordion">
+                <div class="card-body">
+                    <form asp-action="View7" asp-controller="RocketSite">
+                        <div>
+                            <div class="form-group">
+                                <label>Rocket name</label>
+                                <input name="name" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <label>Rocket version</label>
+                                <input name="version" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-outline-secondary" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="heading8">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                        Request 8
+                    </button>
+                </h5>
+            </div>
+            <div id="collapse8" class="collapse" aria-labelledby="heading8" data-parent="#accordion">
+                <div class="card-body">
+                    <form asp-action="View8" asp-controller="RocketSite">
+                        <div>
+                            <div class="form-group">
+                                <label>Customer name</label>
+                                <input name="name" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <label>Customer country</label>
+                                <input name="country" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select name="status" class="form-control  form-control-sm"
+                                        asp-items="Html.GetEnumSelectList<StatusOption>()">
+                                    <option>Select type ...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-outline-secondary" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="heading9">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse9" aria-expanded="false" aria-controls="collapse9">
+                        Request 9
+                    </button>
+                </h5>
+            </div>
+            <div id="collapse9" class="collapse" aria-labelledby="heading9" data-parent="#accordion">
+                <div class="card-body">
+                    <form asp-action="View9" asp-controller="RocketSite">
+                        <div>
+                            <div class="form-group">
+                                <label>Date of order</label>
+                                <input name="date" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select name="status" class="form-control  form-control-sm"
+                                        asp-items="Html.GetEnumSelectList<StatusOption>()">
+                                    <option>Select type ...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-outline-secondary" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="heading10">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse10" aria-expanded="false" aria-controls="collapse10">
+                        Request 10
+                    </button>
+                </h5>
+            </div>
+            <div id="collapse10" class="collapse" aria-labelledby="heading10" data-parent="#accordion">
+                <div class="card-body">
+                    <form asp-action="View10" asp-controller="RocketSite">
+                        <div>
+                            <div class="form-group">
+                                <label>Space mission name</label>
+                                <input name="name" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Save" class="btn btn-outline-secondary" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

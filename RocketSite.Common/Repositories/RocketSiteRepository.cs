@@ -150,7 +150,7 @@ namespace RocketSite.Common.Repositories
                     "SELECT em.*, tp.name as tpname, tp.area as tparea, " +
                     "tp.coach as tpcoach, tp.cost as tpcost, tp.duration as tpduration " +
                     "FROM Employee as em " +
-                    "INNER JOIN TrainingProgram tp ON em.nameTrainingProgram = tp.name " +
+                    "INNER JOIN TrainingProgram as tp ON em.nameTrainingProgram = tp.name " +
                     "AND em.coachTrainingProgram = tp.coach " +
                     "WHERE tp.name = @Name AND tp.coach = @Coach AND tp.area = @Area",
                     new { Name = name, Coach = coach, Area = area });
@@ -222,6 +222,167 @@ namespace RocketSite.Common.Repositories
                         Customer = customer,
                         SpaceMission = spaceMission
                     }).ToList();
+            }
+        }
+
+        public List<Equipment> Get7(string name, string version)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                var itemList = db.Query(
+                    "SELECT ro.*, eq.name as eqname, eq.producer as eqproducer, eq.cost as eqcost " +
+                    "FROM Equipment as eq " +
+                    "INNER JOIN Rocket as ro ON eq.rocketName = ro.name " +
+                    "AND eq.rocketVersion = ro.version " +
+                    "WHERE ro.name = @Name AND ro.version = @Version",
+                    new { Name = name, Version = version });
+
+                return (from item in itemList
+                        let rocket = new Rocket()
+                        {
+                            Name = item.name,
+                            Version = item.version,
+                            Weight = item.weight,
+                            Height = item.height,
+                            Diameter = item.diameter,
+                            Cost = item.cost,
+                            Stages = item.stages,
+                            MassToLEO = item.massToLEO,
+                            MassToGTO = item.massToGTO,
+                            EngineType = item.engineType
+                        }
+                        select new Equipment
+                        {
+                            Name = item.eqname,
+                            Producer = item.eqproducer,
+                            Cost = item.eqcost,
+                            Rocket = rocket
+                        }).ToList();
+            }
+        }
+
+        public List<Resources> Get8(string name, string country, string status)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                var itemList = db.Query(
+                    "SELECT re.*, cr.name as crname, cr.type as crtype, cr.weight as crweight, cr.weight as crweight, " +
+                    "cr.emaunt as cremaunt, cr.spaceMissionName, cr.customerName, cr.customerCountry, " +
+                    "cu.name as cuname, cu.country as cucountry, cu.totalWorth as cutotalWorth, " +
+                    "sm.name as smname, sm.status as smstatus, sm.cost as smcost, sm.altitude as smaltitude, " +
+                    "sm.startDate as smstartDate, sm.endDate as smendDate " +
+                    "FROM Resources as re " +
+                    "INNER JOIN SpaceMission as sm ON sm.name = re.spaceMissionName " +
+                    "INNER JOIN Cargo as cr ON sm.name = cr.spaceMissionName " +
+                    "INNER JOIN Customer as cu ON cr.customerName = cu.name " +
+                    "AND cr.customerCountry = cu.country " +
+                    "WHERE cu.name = @Name AND cu.country = @Country AND sm.status = @Status",
+                    new { Name = name, Country = country, Status = Enum.Parse<StatusOption>(status) });
+
+                return (from item in itemList
+                        let customer = new Customer() { Name = item.cuname, Country = item.cucountry, TotalWorth = item.cutotalWorth }
+                        let cargo = new Cargo 
+                        { 
+                            Name = item.crname, 
+                            Type = Enum.Parse<CargoOption>(item.crtype), 
+                            Weight = item.crweight, 
+                            Emaunt = item.cremaunt, 
+                            Customer = customer 
+                        }
+                        
+                        let spaceMission = new SpaceMission()
+                        {
+                            Name = item.smname,
+                            Status = Enum.Parse<StatusOption>(item.smstatus),
+                            Cost = item.smcost,
+                            Altitude = item.smaltitude,
+                            StartDate = item.smstartDate,
+                            EndDate = item.smendDate,
+                            Cargoes = new List<Cargo> { cargo }
+                        }
+                        select new Resources
+                        {
+                            Name = item.name,
+                            Type = Enum.Parse<ResourceOption>(item.type),
+                            Emaunt = item.emaunt,
+                            Cost = item.cost,
+                            SpaceMission = spaceMission
+                        }).ToList();
+            }
+        }
+
+        public List<Customer> Get9(string date, string status)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                var itemList = db.Query(
+                    "SELECT cu.*, cr.name as crname, cr.type as crtype, cr.weight as crweight, cr.weight as crweight, " +
+                    "cr.emaunt as cremaunt, cr.spaceMissionName, cr.customerName, cr.customerCountry, " +
+                    "sm.name as smname, sm.status as smstatus, sm.cost as smcost, sm.altitude as smaltitude, " +
+                    "sm.startDate as smstartDate, sm.endDate as smendDate " +
+                    "FROM Customer as cu " +
+                    "INNER JOIN Cargo as cr ON cu.name = cr.customerName " +
+                    "AND cu.country = cr.customerCountry " +
+                    "INNER JOIN SpaceMission as sm ON sm.name = cr.spaceMissionName " +
+                    "WHERE sm.startDate = @Date AND sm.status = @Status",
+                    new { Date = date, Status = Enum.Parse<StatusOption>(status) });
+
+                return (from item in itemList
+                        let spaceMission = new SpaceMission()
+                        {
+                            Name = item.smname,
+                            Status = Enum.Parse<StatusOption>(item.smstatus),
+                            Cost = item.smcost,
+                            Altitude = item.smaltitude,
+                            StartDate = item.smstartDate,
+                            EndDate = item.smendDate
+                        }
+                        let cargo = new Cargo
+                        {
+                            Name = item.crname,
+                            Type = Enum.Parse<CargoOption>(item.crtype),
+                            Weight = item.crweight,
+                            Emaunt = item.cremaunt,
+                            SpaceMission = spaceMission
+                        }
+                        select new Customer
+                        {
+                            Name = item.name,
+                            Country = item.country,
+                            TotalWorth = item.totalWorth,
+                            Cargos = new List<Cargo> { cargo }
+                        }).ToList();
+            }
+        }
+
+        public List<Purchase> Get10(string name)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                var itemList = db.Query(
+                    "SELECT pu.*, sm.name as smname, sm.status as smstatus, sm.cost as smcost, sm.altitude as smaltitude, " +
+                    "sm.startDate as smstartDate, sm.endDate as smendDate " +
+                    "FROM Purchase as pu " +
+                    "INNER JOIN SpaceMission as sm ON sm.name = pu.spaceMissionName " +
+                    "WHERE sm.name = @Name",
+                    new { Name = name });
+
+                return (from item in itemList
+                        let spaceMission = new SpaceMission()
+                        {
+                            Name = item.smname,
+                            Status = Enum.Parse<StatusOption>(item.smstatus),
+                            Cost = item.smcost,
+                            Altitude = item.smaltitude,
+                            StartDate = item.smstartDate,
+                            EndDate = item.smendDate
+                        }
+                        select new Purchase
+                        {
+                            Name = item.name,
+                            Cost = item.cost,
+                            SpaceMission = spaceMission
+                        }).ToList();
             }
         }
     }

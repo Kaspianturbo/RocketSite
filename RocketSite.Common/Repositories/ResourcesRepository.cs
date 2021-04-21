@@ -50,7 +50,8 @@ namespace RocketSite.Common.Repositories
                         Name = item.name,
                         Type = Enum.Parse<ResourceOption>(item.type),
                         Emaunt = item.emaunt,
-                        Cost = item.cost
+                        Cost = item.cost,
+                        SpaceMission = new SpaceMission { Name = item.spaceMissionName }
                     }).FirstOrDefault();
             }
         }
@@ -67,7 +68,8 @@ namespace RocketSite.Common.Repositories
                         Name = item.name,
                         Type = Enum.Parse<ResourceOption>(item.type),
                         Emaunt = item.emaunt,
-                        Cost = item.cost
+                        Cost = item.cost,
+                        SpaceMission = new SpaceMission { Name = item.spaceMissionName }
                     }).ToList();
             }
         }
@@ -81,11 +83,14 @@ namespace RocketSite.Common.Repositories
                     $"type = @Type, " +
                     $"emaunt = @Emaunt, " +
                     $"cost = @Cost " +
+                    $"spaceMissionName = @MissionName " +
                     $"WHERE name = @Key1 AND type = @Key2";
                 db.Execute(sqlQuery, new
                 {
                     @object.Name, @object.Type, @object.Cost, 
-                    @object.Emaunt, Key1 = key.First, Key2 = Enum.Parse<ResourceOption>(key.Second)
+                    @object.Emaunt, Key1 = key.First, 
+                    Key2 = Enum.Parse<ResourceOption>(key.Second),
+                    MissionName =  @object.SpaceMission.Name
                 });
             }
         }

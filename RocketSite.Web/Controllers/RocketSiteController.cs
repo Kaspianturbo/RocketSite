@@ -52,24 +52,24 @@ namespace RocketSite.Web.Controllers
             var res = _repository.Get6(name, status);
             return View(res);
         }
-        public ActionResult View7(int mass, string eqName, string eqProducer)
+        public ActionResult View7(string name, string version)
         {
-            var res = _repository.Get2(mass, eqName, eqProducer);
+            var res = _repository.Get7(name, version);
             return View(res);
         }
-        public ActionResult View8(int mass, string eqName, string eqProducer)
+        public ActionResult View8(string name, string country, string status)
         {
-            var res = _repository.Get2(mass, eqName, eqProducer);
+            var res = _repository.Get8(name, country, status);
             return View(res);
         }
-        public ActionResult View9(int mass, string eqName, string eqProducer)
+        public ActionResult View9(string date, string status)
         {
-            var res = _repository.Get2(mass, eqName, eqProducer);
+            var res = _repository.Get9(date, status);
             return View(res);
         }
-        public ActionResult View10(int mass, string eqName, string eqProducer)
+        public ActionResult View10(string name)
         {
-            var res = _repository.Get2(mass, eqName, eqProducer);
+            var res = _repository.Get10(name);
             return View(res);
         }
     }
