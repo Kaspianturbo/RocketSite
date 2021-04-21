@@ -17,6 +17,6 @@ namespace RocketSite.Common.Models
         public int Emaunt { get; set; }
         [Display(Name = "Cost")]
         public int Cost { get; set; }
-        public List<SpaceMission> SpaceMissions { get; set; }
+        public SpaceMission SpaceMission { get; set; }
     }
 }

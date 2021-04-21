@@ -20,5 +20,6 @@ namespace RocketSite.Common.Models
         [Display(Name = "Profession")]
         public string Profession { get; set; }
         public TrainingProgram TrainingProgram { get; set; }
+        public SpaceMission SpaceMission { get; set; }
     }
 }

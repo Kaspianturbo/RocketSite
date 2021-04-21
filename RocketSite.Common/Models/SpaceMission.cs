@@ -28,5 +28,6 @@ namespace RocketSite.Common.Models
         public List<Resources> Resources { get; set; }
         public List<Cargo> Cargoes { get; set; }
         public List<Employee> Employees { get; set; }
+        public List<Purchase> Purchases { get; set; }
     }
 }
