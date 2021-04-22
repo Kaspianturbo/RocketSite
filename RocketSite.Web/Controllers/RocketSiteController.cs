@@ -72,5 +72,15 @@ namespace RocketSite.Web.Controllers
             var res = _repository.Get10(name);
             return View(res);
         }
+        public ActionResult View11(string name, string status, string timezone)
+        {
+            var res = _repository.Get11(name, status, timezone);
+            return View(res);
+        }
+        public ActionResult View12(string name, string status, string timezone)
+        {
+            var res = _repository.Get12(name, status, timezone);
+            return View(res);
+        }
     }
 }

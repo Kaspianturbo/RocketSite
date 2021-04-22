@@ -1,0 +1,52 @@
+﻿@model IEnumerable<RocketSite.Common.Models.Cosmodrome>
+
+@{
+    ViewData["Title"] = "View12";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>Response 12</h4>
+    <hr />
+    <div class="container">
+        <div class="row">
+            @{
+                int i = 0;
+            }
+            @foreach (var item in Model)
+            {
+                <div class="card col-6">
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-6">
+                                @Html.DisplayNameFor(item => item.Name)
+                            </dt>
+                            <dd class="col-sm-6">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </dd>
+                            <dt class="col-sm-6">
+                                @Html.DisplayNameFor(item => item.Timezone)
+                            </dt>
+                            <dd class="col-sm-6">
+                                @Html.DisplayFor(modelItem => item.Timezone)
+                            </dd>
+                            <dt class="col-sm-6">
+                                Space mission name
+                            </dt>
+                            <dd class="col-sm-6">
+                                @Html.DisplayFor(modelItem => item.SpaceMissions[0].Name)
+                            </dd>
+                            <dt class="col-sm-6">
+                                @Html.DisplayNameFor(item => item.SpaceMissions[0].Status)
+                            </dt>
+                            <dd class="col-sm-6">
+                                @Html.DisplayFor(modelItem => item.SpaceMissions[0].Status)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                i++;
+            }
+        </div>
+    </div>
+</div>

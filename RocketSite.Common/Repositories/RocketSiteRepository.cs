@@ -385,5 +385,75 @@ namespace RocketSite.Common.Repositories
                         }).ToList();
             }
         }
+
+        public List<Cosmodrome> Get11(string name, string status, string timezone)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                var itemList = db.Query(
+                    "SELECT sm.*, co.name as coname, co.timezone as cotimezone, " +
+                    "lo.latitude as lolatitude, lo.longitude as lolongitude, " +
+                    "lo.country as locountry, lo.city as locity " +
+                    "FROM SpaceMission as sm " +
+                    "INNER JOIN Cosmodrome as co ON sm.cosmodromeName = co.name " +
+                    "LEFT JOIN Location as lo ON co.latitude = lo.latitude " +
+                    "AND co.longitude = lo.longitude " +
+                    "WHERE sm.name = @Name AND sm.status = @Status AND co.timezone = Timezone",
+                    new { Name = name, Status = Enum.Parse<StatusOption>(status), Timezone = timezone });
+
+                return (from item in itemList
+                        let spaceMission = new SpaceMission()
+                        {
+                            Name = item.name,
+                            Status = Enum.Parse<StatusOption>(item.status),
+                            Cost = item.cost,
+                            Altitude = item.altitude,
+                            StartDate = item.startDate,
+                            EndDate = item.endDate
+                        }
+                        let location = new Location
+                        {
+                            City = item.locity,
+                            Country = item.locountry,
+                            Latitude = item.lolatitude,
+                            Longitude = item.lolongitude
+                        }
+                        select new Cosmodrome
+                        {
+                            Name = item.name,
+                            Timezone = item.cotimezone,
+                            Location = location,
+                            SpaceMissions = new List<SpaceMission> { spaceMission }
+                        }).ToList();
+            }
+        }
+
+        public List<Cosmodrome> Get12(string name, string status, string timezone)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                var itemList = db.Query(
+                    "SELECT co.name, co.timezone, sm.name as smname, sm.status " +
+                    "FROM SpaceMission as sm " +
+                    "INNER JOIN Cosmodrome as co ON sm.cosmodromeName = co.name " +
+                    "LEFT JOIN Location as lo ON co.latitude = lo.latitude " +
+                    "AND co.longitude = lo.longitude " +
+                    "WHERE sm.name = @Name AND sm.status = @Status AND co.timezone = Timezone",
+                    new { Name = name, Status = Enum.Parse<StatusOption>(status), Timezone = timezone });
+
+                return (from item in itemList
+                        let spaceMission = new SpaceMission()
+                        {
+                            Name = item.smname,
+                            Status = Enum.Parse<StatusOption>(item.status)
+                        }
+                        select new Cosmodrome
+                        {
+                            Name = item.name,
+                            Timezone = item.timezone,
+                            SpaceMissions = new List<SpaceMission>() { spaceMission }
+                        }).ToList();
+            }
+        }
     }
 }

@@ -20,5 +20,7 @@ namespace RocketSite.Common.Interfaces
         List<Resources> Get8(string param1, string param2, string param3);
         List<Customer> Get9(string param1, string param2);
         List<Purchase> Get10(string param1);
+        List<Cosmodrome> Get11(string param1, string param2, string param3);
+        List<Cosmodrome> Get12(string param1, string param2, string param3);
     }
 }
