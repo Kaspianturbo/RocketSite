@@ -9,219 +9,223 @@
     <h4>Response 1</h4>
     <hr />
     <div class="container">
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="card col-6">
+    <div class="row">
+    @{
+        int i = 0;
+    }
+    @foreach (var item in Model)
+    {
+        <div class="card col-6">
+        <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(item => item.Name)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(modelItem => item.Name)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(item => item.Status)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(modelItem => item.Status)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(item => item.Cost)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(modelItem => item.Cost)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(item => item.Altitude)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(modelItem => item.Altitude)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(item => item.StartDate)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(item => item.EndDate)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </dd>
+        </dl>
+        <div id="accordion @i">
+            <div class="card">
+                <div class="card-header" id="headingOne @i">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne @i" aria-expanded="false" aria-controls="collapseOne @i">
+                            Rocket
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseOne @i" class="collapse collapsed" aria-labelledby="headingOne @i" data-parent="#accordion @i">
                     <div class="card-body">
                         <dl class="row">
                             <dt class="col-sm-4">
-                                @Html.DisplayNameFor(item => item.Name)
+                                @Html.DisplayNameFor(item => item.Rocket.Name)
                             </dt>
                             <dd class="col-sm-8">
-                                @Html.DisplayFor(modelItem => item.Name)
+                                @Html.DisplayFor(modelItem => item.Rocket.Name)
                             </dd>
                             <dt class="col-sm-4">
-                                @Html.DisplayNameFor(item => item.Status)
+                                @Html.DisplayNameFor(item => item.Rocket.Version)
                             </dt>
                             <dd class="col-sm-8">
-                                @Html.DisplayFor(modelItem => item.Status)
+                                @Html.DisplayFor(modelItem => item.Rocket.Version)
                             </dd>
                             <dt class="col-sm-4">
-                                @Html.DisplayNameFor(item => item.Cost)
+                                @Html.DisplayNameFor(item => item.Rocket.Weight)
                             </dt>
                             <dd class="col-sm-8">
-                                @Html.DisplayFor(modelItem => item.Cost)
+                                @Html.DisplayFor(modelItem => item.Rocket.Weight)
                             </dd>
                             <dt class="col-sm-4">
-                                @Html.DisplayNameFor(item => item.Altitude)
+                                @Html.DisplayNameFor(item => item.Rocket.Height)
                             </dt>
                             <dd class="col-sm-8">
-                                @Html.DisplayFor(modelItem => item.Altitude)
+                                @Html.DisplayFor(modelItem => item.Rocket.Height)
                             </dd>
                             <dt class="col-sm-4">
-                                @Html.DisplayNameFor(item => item.StartDate)
+                                @Html.DisplayNameFor(item => item.Rocket.Diameter)
                             </dt>
                             <dd class="col-sm-8">
-                                @Html.DisplayFor(modelItem => item.StartDate)
+                                @Html.DisplayFor(modelItem => item.Rocket.Diameter)
                             </dd>
                             <dt class="col-sm-4">
-                                @Html.DisplayNameFor(item => item.EndDate)
+                                @Html.DisplayNameFor(item => item.Rocket.Cost)
                             </dt>
                             <dd class="col-sm-8">
-                                @Html.DisplayFor(modelItem => item.EndDate)
+                                @Html.DisplayFor(modelItem => item.Rocket.Cost)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Rocket.Stages)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Rocket.Stages)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Rocket.MassToLEO)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Rocket.MassToLEO)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Rocket.MassToGTO)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Rocket.MassToGTO)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Rocket.EngineType)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Rocket.EngineType)
                             </dd>
                         </dl>
-                        <div id="accordion">
-                            <div class="card">
-                                <div class="card-header" id="headingOne">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                            Rocket
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div id="collapseOne" class="collapse collapsed" aria-labelledby="headingOne" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <dl class="row">
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Rocket.Name)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Rocket.Name)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Rocket.Version)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Rocket.Version)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Rocket.Weight)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Rocket.Weight)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Rocket.Height)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Rocket.Height)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Rocket.Diameter)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Rocket.Diameter)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Rocket.Cost)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Rocket.Cost)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Rocket.Stages)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Rocket.Stages)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Rocket.MassToLEO)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Rocket.MassToLEO)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Rocket.MassToGTO)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Rocket.MassToGTO)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Rocket.EngineType)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Rocket.EngineType)
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header" id="headingTwo">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            Cosmodrome
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <dl class="row">
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Cosmodrome.Name)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Cosmodrome.Name)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Cosmodrome.Timezone)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Cosmodrome.Timezone)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Cosmodrome.Location.Country)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Cosmodrome.Location.Country)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Cosmodrome.Location.City)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Cosmodrome.Location.City)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Cosmodrome.Location.Latitude)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Cosmodrome.Location.Latitude)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Cosmodrome.Location.Longitude)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Cosmodrome.Location.Longitude)
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header" id="headingThree">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                            Cargo
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <dl class="row">
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Cargoes[0].Name)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Cargoes[0].Name)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Cargoes[0].Type)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Cargoes[0].Type)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Cargoes[0].Weight)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Cargoes[0].Weight)
-                                            </dd>
-                                            <dt class="col-sm-4">
-                                                @Html.DisplayNameFor(item => item.Cargoes[0].Emaunt)
-                                            </dt>
-                                            <dd class="col-sm-8">
-                                                @Html.DisplayFor(modelItem => item.Cargoes[0].Emaunt)
-                                            </dd>
-                                        </dl>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            }
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo @i">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo @i" aria-expanded="false" aria-controls="collapseTwo @i">
+                            Cosmodrome
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo @i" class="collapse" aria-labelledby="headingTwo @i" data-parent="#accordion @i">
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Cosmodrome.Name)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Cosmodrome.Name)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Cosmodrome.Timezone)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Cosmodrome.Timezone)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Cosmodrome.Location.Country)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Cosmodrome.Location.Country)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Cosmodrome.Location.City)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Cosmodrome.Location.City)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Cosmodrome.Location.Latitude)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Cosmodrome.Location.Latitude)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Cosmodrome.Location.Longitude)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Cosmodrome.Location.Longitude)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree @i">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree @i" aria-expanded="false" aria-controls="collapseThree @i">
+                            Cargo
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree @i" class="collapse" aria-labelledby="headingThree @i" data-parent="#accordion @i">
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Cargoes[0].Name)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Cargoes[0].Name)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Cargoes[0].Type)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Cargoes[0].Type)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Cargoes[0].Weight)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Cargoes[0].Weight)
+                            </dd>
+                            <dt class="col-sm-4">
+                                @Html.DisplayNameFor(item => item.Cargoes[0].Emaunt)
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(modelItem => item.Cargoes[0].Emaunt)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
         </div>
+        </div>
+        </div>
+        i++;
+    }
+    </div>
     </div>
 </div>

@@ -23,9 +23,13 @@ namespace RocketSite.Common.Repositories
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = $"INSERT INTO Resources (name, type, emaunt, cost) " +
-                    "VALUES(@Name, @Type, @Emaunt, @Cost)";
-                db.Execute(sqlQuery, @object);
+                var sqlQuery = $"INSERT INTO Resources (name, type, emaunt, cost, spaceMissionName) " +
+                    "VALUES(@Name, @Type, @Emaunt, @Cost, @SpaceMissionName)";
+                db.Execute(sqlQuery, new 
+                { 
+                    @object.Name, @object.Type, @object.Emaunt, @object.Cost, 
+                    SpaceMissionName = @object.SpaceMission.Name
+                });
             }
         }
 

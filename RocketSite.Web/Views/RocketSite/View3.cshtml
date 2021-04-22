@@ -10,6 +10,9 @@
     <hr />
     <div class="container">
         <div class="row">
+            @{
+                int i = 0;
+            }
             @foreach (var item in Model)
             {
                 <div class="card col-6">
@@ -28,16 +31,16 @@
                                 @Html.DisplayFor(modelItem => item.Timezone)
                             </dd>
                         </dl>
-                        <div id="accordion">
+                        <div id="accordion @i">
                             <div class="card">
-                                <div class="card-header" id="headingOne">
+                                <div class="card-header" id="headingOne @i">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne @i" aria-expanded="false" aria-controls="collapseOne @i">
                                             Space mission
                                         </button>
                                     </h5>
                                 </div>
-                                <div id="collapseOne" class="collapse collapsed" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div id="collapseOne @i" class="collapse collapsed" aria-labelledby="headingOne @i" data-parent="#accordion @i">
                                     <div class="card-body">
                                         <dl class="row">
                                             <dt class="col-sm-4">
@@ -83,6 +86,7 @@
                         </div>
                     </div>
                 </div>
+                i++;
             }
         </div>
     </div>
