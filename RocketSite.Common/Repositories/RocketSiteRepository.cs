@@ -38,7 +38,7 @@ namespace RocketSite.Common.Repositories
                     "INNER JOIN Cosmodrome as co ON sm.cosmodromeName = co.name " +
                     "LEFT JOIN Location as lo ON co.latitude = lo.latitude " +
                     "AND co.longitude = lo.longitude " +
-                    "WHERE cr.name = @Name AND cr.type = @Type",
+                    "WHERE cr.name = @Name AND cr.type = @Type AND sm.startDate = @StartDate AND sm.endDate = @EndDate",
                     param: new { Name = name, Type = Enum.Parse<CargoOption>(type), StartDate = startDate, EndDate = endDate });
 
                 return (from item in itemList
